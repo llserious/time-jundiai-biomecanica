@@ -9,11 +9,15 @@
 body{font-family:Arial,sans-serif;background:#07111d;color:#fff;min-height:100vh}
 header{height:72px;background:#0b1d30;border-bottom:1px solid #18344f;display:flex;align-items:center;padding:0 32px}
 .brand{font-size:20px;font-weight:800;letter-spacing:.5px}.brand span{color:#48a9ff}
-main{max-width:1400px;margin:auto;padding:32px}.top{margin-bottom:24px}
-.tag{display:inline-block;background:#102b45;color:#73bdff;border:1px solid #214e72;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:12px}
-h1{font-size:30px;margin-bottom:8px}.subtitle{color:#91a4b8;font-size:15px}
-.grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(320px,1fr);gap:22px}
+main{max-width:1450px;margin:auto;padding:30px}.top{margin-bottom:22px}
+.tag{display:inline-block;background:#102b45;color:#73bdff;border:1px solid #214e72;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:11px}
+h1{font-size:30px;margin-bottom:7px}.subtitle{color:#91a4b8;font-size:15px}
+.grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(340px,1fr);gap:22px}
 .card{background:#0c1928;border:1px solid #1a3045;border-radius:16px;padding:20px}
+.protocolBar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:16px;flex-wrap:wrap}
+.protocolTitle{font-weight:800;font-size:15px}.protocolCode{font-size:11px;color:#7790a6;margin-top:4px}
+.planes{display:flex;background:#07111d;padding:4px;border-radius:10px;border:1px solid #1b354d}
+.plane{background:transparent;color:#8399ad;padding:9px 16px}.plane.active{background:#1677d2;color:#fff}
 .camera{position:relative;width:100%;aspect-ratio:16/9;background:#030a11;border-radius:12px;overflow:hidden}
 video{position:absolute;width:100%;height:100%;object-fit:cover;display:none}
 canvas{position:absolute;width:100%;height:100%;left:0;top:0;pointer-events:none}
@@ -22,41 +26,58 @@ canvas{position:absolute;width:100%;height:100%;left:0;top:0;pointer-events:none
 .badge{position:absolute;top:14px;z-index:5;border-radius:20px;padding:7px 12px;font-size:11px;font-weight:800}
 .cameraStatus{left:14px;background:#151d25;border:1px solid #34404b}.cameraStatus.on{background:#103b28;border-color:#1d754b;color:#72e5a6}
 .poseStatus{right:14px;background:#382515;border:1px solid #75502a;color:#ffc47c}.poseStatus.detected{background:#103b28;border-color:#1d754b;color:#72e5a6}
-.controls{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
-button{border:0;border-radius:9px;padding:12px 18px;font-weight:700;cursor:pointer;font-size:14px}
+.positionStatus{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:6;background:#3c2515;color:#ffc47c;border:1px solid #80572d;padding:9px 15px;border-radius:20px;font-size:12px;font-weight:800;white-space:nowrap}
+.positionStatus.valid{background:#103b28;color:#6fe7a5;border-color:#237a50}
+.controls{display:flex;gap:10px;margin-top:15px}
+button{border:0;border-radius:9px;padding:11px 17px;font-weight:700;cursor:pointer;font-size:14px}
 .primary{background:#1677d2;color:#fff}.secondary{background:#17283a;color:#d7e5f2;border:1px solid #29445e}
 button:disabled{opacity:.45;cursor:not-allowed}
 .sideTitle{font-size:17px;font-weight:800;margin-bottom:16px}
-.qualityBox{background:#101f2e;border:1px solid #203b55;border-radius:12px;padding:14px;margin-bottom:18px}
-.qualityTop{display:flex;justify-content:space-between;gap:12px;margin-bottom:9px;font-size:13px;font-weight:700}
-.qualityBar{height:7px;background:#1b2b3b;border-radius:10px;overflow:hidden}.qualityFill{height:100%;width:0;background:#54d796;transition:.2s}
+.qualityBox{background:#101f2e;border:1px solid #203b55;border-radius:12px;padding:14px;margin-bottom:15px}
+.qualityTop{display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;font-weight:700}
+.qualityBar{height:7px;background:#1b2b3b;border-radius:10px;overflow:hidden}.qualityFill{height:100%;width:0;background:#54d796;transition:.15s}
 .qualityMessage{font-size:12px;color:#8fa5b9;margin-top:9px;line-height:1.4}
-.metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.metric{background:#101f2e;border:1px solid #20384e;border-radius:12px;padding:14px}
-.metricLabel{font-size:10px;color:#7f95a9;text-transform:uppercase;font-weight:800;margin-bottom:7px}
-.metricValue{font-size:25px;font-weight:800}.metricSub{font-size:11px;color:#72879a;margin-top:4px}
-.info{padding:13px 0;border-bottom:1px solid #1a3045}.info:last-child{border:0}
-.label{font-size:10px;text-transform:uppercase;color:#71869a;font-weight:700;margin-bottom:5px}
-.value{font-size:13px;color:#e7f0f8}.ok{color:#61dc9b}.warn{color:#ffc46b}.error{color:#ff7777}
-.message{margin-top:16px;padding:13px;border-radius:9px;background:#101f2e;color:#91a4b8;font-size:13px;line-height:1.5}
-@media(max-width:850px){main{padding:18px}.grid{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}header{padding:0 18px}}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.metric{background:#101f2e;border:1px solid #20384e;border-radius:12px;padding:13px}
+.metricLabel{font-size:10px;color:#7f95a9;text-transform:uppercase;font-weight:800;margin-bottom:6px}
+.metricValue{font-size:25px;font-weight:800}.metricSub{font-size:10px;color:#72879a;margin-top:4px}
+.protocolInfo{margin-top:14px;padding:12px;background:#0a1623;border-radius:10px;border:1px solid #172e43}
+.infoRow{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #182b3d;font-size:12px}.infoRow:last-child{border:0}
+.infoLabel{color:#71869a}.ok{color:#61dc9b}.warn{color:#ffc46b}.error{color:#ff7777}
+.message{margin-top:15px;padding:12px;border-radius:9px;background:#101f2e;color:#91a4b8;font-size:13px;line-height:1.5}
+@media(max-width:850px){main{padding:16px}.grid{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}header{padding:0 18px}.positionStatus{font-size:10px}}
 </style>
 </head>
-
 <body>
+
 <header><div class="brand">TIME JUNDIAÍ <span>PERFORMANCE</span></div></header>
 
 <main>
+
 <div class="top">
-<div class="tag">MOTOR BIOMECÂNICO • MVP 0.3</div>
-<h1>Biomecânica em tempo real</h1>
-<div class="subtitle">TJP-SQUAT-01 • Validação inicial dos ângulos articulares e qualidade do enquadramento.</div>
+<div class="tag">MOTOR BIOMECÂNICO • MVP 0.4</div>
+<h1>Protocolo de captura</h1>
+<div class="subtitle">TJP-SQUAT-01 • Agachamento Bilateral • Preparação para captura padronizada.</div>
 </div>
 
 <div class="grid">
 
 <div class="card">
+
+<div class="protocolBar">
+<div>
+<div class="protocolTitle">Agachamento Bilateral</div>
+<div class="protocolCode">TJP-SQUAT-01 • v1.0</div>
+</div>
+
+<div class="planes">
+<button class="plane active" id="frontalBtn" onclick="setPlane('frontal')">Frontal</button>
+<button class="plane" id="lateralBtn" onclick="setPlane('lateral')">Lateral</button>
+</div>
+</div>
+
 <div class="camera">
+
 <video id="camera" autoplay playsinline muted></video>
 <canvas id="overlay"></canvas>
 
@@ -66,6 +87,8 @@ button:disabled{opacity:.45;cursor:not-allowed}
 
 <div class="badge cameraStatus" id="cameraStatus">CÂMERA DESLIGADA</div>
 <div class="badge poseStatus" id="poseStatus">AGUARDANDO CORPO</div>
+<div class="positionStatus" id="positionStatus">POSICIONAMENTO NÃO VALIDADO</div>
+
 </div>
 
 <div class="controls">
@@ -73,15 +96,16 @@ button:disabled{opacity:.45;cursor:not-allowed}
 <button class="secondary" id="stopBtn" onclick="stopCamera()" disabled>Parar câmera</button>
 </div>
 
-<div class="message" id="message">Carregando o motor biomecânico...</div>
+<div class="message" id="message">Carregando motor biomecânico...</div>
+
 </div>
 
 <div class="card">
 
-<div class="sideTitle">Análise biomecânica</div>
+<div class="sideTitle">Validação do posicionamento</div>
 
 <div class="qualityBox">
-<div class="qualityTop"><span>Qualidade do enquadramento</span><span id="qualityValue">0%</span></div>
+<div class="qualityTop"><span>Qualidade técnica</span><span id="qualityValue">0%</span></div>
 <div class="qualityBar"><div class="qualityFill" id="qualityFill"></div></div>
 <div class="qualityMessage" id="qualityMessage">Aguardando câmera.</div>
 </div>
@@ -91,51 +115,41 @@ button:disabled{opacity:.45;cursor:not-allowed}
 <div class="metric">
 <div class="metricLabel">Joelho esquerdo</div>
 <div class="metricValue" id="kneeLeft">—°</div>
-<div class="metricSub">Quadril • joelho • tornozelo</div>
+<div class="metricSub">ângulo interno 2D</div>
 </div>
 
 <div class="metric">
 <div class="metricLabel">Joelho direito</div>
 <div class="metricValue" id="kneeRight">—°</div>
-<div class="metricSub">Quadril • joelho • tornozelo</div>
+<div class="metricSub">ângulo interno 2D</div>
 </div>
 
 <div class="metric">
 <div class="metricLabel">Quadril</div>
 <div class="metricValue" id="hipAngle">—°</div>
-<div class="metricSub">Média bilateral</div>
+<div class="metricSub">média bilateral</div>
 </div>
 
 <div class="metric">
-<div class="metricLabel">Inclinação do tronco</div>
+<div class="metricLabel">Tronco</div>
 <div class="metricValue" id="trunkAngle">—°</div>
-<div class="metricSub">Referência vertical 2D</div>
+<div class="metricSub">inclinação vertical 2D</div>
 </div>
 
 </div>
 
-<div class="info">
-<div class="label">Corpo</div>
-<div class="value" id="bodyInfo">Não detectado</div>
-</div>
-
-<div class="info">
-<div class="label">Landmarks</div>
-<div class="value" id="landmarkInfo">0 / 33</div>
-</div>
-
-<div class="info">
-<div class="label">FPS de análise</div>
-<div class="value" id="fpsInfo">—</div>
-</div>
-
-<div class="info">
-<div class="label">Motor</div>
-<div class="value" id="engine">Carregando...</div>
+<div class="protocolInfo">
+<div class="infoRow"><span class="infoLabel">Plano</span><strong id="planeInfo">FRONTAL</strong></div>
+<div class="infoRow"><span class="infoLabel">Corpo</span><strong id="bodyInfo">Não detectado</strong></div>
+<div class="infoRow"><span class="infoLabel">Landmarks</span><strong id="landmarkInfo">0 / 33</strong></div>
+<div class="infoRow"><span class="infoLabel">Estabilidade</span><strong id="stabilityInfo">Aguardando</strong></div>
+<div class="infoRow"><span class="infoLabel">FPS</span><strong id="fpsInfo">—</strong></div>
+<div class="infoRow"><span class="infoLabel">Motor</span><strong id="engine">Carregando...</strong></div>
 </div>
 
 </div>
 </div>
+
 </main>
 
 <script type="module">
@@ -145,47 +159,108 @@ import {PoseLandmarker,FilesetResolver} from "https://cdn.jsdelivr.net/npm/@medi
 let poseLandmarker=null;
 let stream=null;
 let running=false;
+let plane="frontal";
 let lastVideoTime=-1;
 let frames=0;
 let fpsTime=performance.now();
+let stableFrames=0;
+
+const smooth={
+kneeLeft:null,
+kneeRight:null,
+hip:null,
+trunk:null
+};
+
+const SMOOTH_ALPHA=.22;
 
 const video=document.getElementById("camera");
 const canvas=document.getElementById("overlay");
 const ctx=canvas.getContext("2d");
 
-const connections=[[11,12],[11,13],[13,15],[12,14],[14,16],[11,23],[12,24],[23,24],[23,25],[25,27],[27,29],[29,31],[24,26],[26,28],[28,30],[30,32]];
+const connections=[
+[11,12],[11,13],[13,15],[12,14],[14,16],
+[11,23],[12,24],[23,24],
+[23,25],[25,27],[27,29],[29,31],
+[24,26],[26,28],[28,30],[30,32]
+];
 
 async function initMediaPipe(){
 try{
 const vision=await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22-rc.20250304/wasm");
-poseLandmarker=await PoseLandmarker.createFromOptions(vision,{baseOptions:{modelAssetPath:"https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/latest/pose_landmarker_lite.task",delegate:"GPU"},runningMode:"VIDEO",numPoses:1,minPoseDetectionConfidence:.5,minPosePresenceConfidence:.5,minTrackingConfidence:.5});
-document.getElementById("engine").innerHTML='<span class="ok">MEDIAPIPE ATIVO</span>';
-document.getElementById("message").innerHTML='<strong>Motor pronto.</strong> Inicie a câmera e mantenha o corpo inteiro visível.';
+
+poseLandmarker=await PoseLandmarker.createFromOptions(vision,{
+baseOptions:{
+modelAssetPath:"https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/latest/pose_landmarker_lite.task",
+delegate:"GPU"
+},
+runningMode:"VIDEO",
+numPoses:1,
+minPoseDetectionConfidence:.55,
+minPosePresenceConfidence:.55,
+minTrackingConfidence:.55
+});
+
+document.getElementById("engine").innerHTML='<span class="ok">ATIVO</span>';
+document.getElementById("message").innerHTML='<strong>Motor pronto.</strong> Selecione o plano, inicie a câmera e enquadre o corpo inteiro.';
 document.getElementById("startBtn").disabled=false;
+
 }catch(e){
 console.error(e);
-document.getElementById("engine").innerHTML='<span class="error">ERRO: '+e.message+'</span>';
-document.getElementById("message").innerHTML='<strong>Falha ao carregar MediaPipe.</strong>';
+document.getElementById("engine").innerHTML='<span class="error">ERRO</span>';
+document.getElementById("message").textContent=e.message;
 }
+}
+
+function setPlane(value){
+plane=value;
+
+document.getElementById("frontalBtn").classList.toggle("active",value==="frontal");
+document.getElementById("lateralBtn").classList.toggle("active",value==="lateral");
+document.getElementById("planeInfo").textContent=value.toUpperCase();
+
+stableFrames=0;
+resetSmoothing();
+
+document.getElementById("positionStatus").textContent="POSICIONAMENTO NÃO VALIDADO";
+document.getElementById("positionStatus").classList.remove("valid");
+
+document.getElementById("qualityMessage").textContent=
+value==="frontal"
+?"Plano frontal: mantenha o corpo inteiro de frente para a câmera."
+:"Plano lateral: mantenha o corpo inteiro de perfil para a câmera.";
 }
 
 async function startCamera(){
 if(stream)return;
+
 try{
-stream=await navigator.mediaDevices.getUserMedia({audio:false,video:{width:{ideal:1280},height:{ideal:720}}});
+stream=await navigator.mediaDevices.getUserMedia({
+audio:false,
+video:{width:{ideal:1280},height:{ideal:720}}
+});
+
 video.srcObject=stream;
 await video.play();
+
 video.style.display="block";
 document.getElementById("placeholder").style.display="none";
+
 document.getElementById("cameraStatus").textContent="CÂMERA ATIVA";
 document.getElementById("cameraStatus").classList.add("on");
+
 document.getElementById("startBtn").disabled=true;
 document.getElementById("stopBtn").disabled=false;
+
 canvas.width=video.videoWidth;
 canvas.height=video.videoHeight;
+
 running=true;
 lastVideoTime=-1;
+stableFrames=0;
+
 requestAnimationFrame(predict);
+
 }catch(e){
 document.getElementById("message").innerHTML='<strong>Falha na câmera:</strong> '+e.name+' — '+e.message;
 }
@@ -193,161 +268,363 @@ document.getElementById("message").innerHTML='<strong>Falha na câmera:</strong>
 
 function angle3(a,b,c){
 if(!a||!b||!c)return null;
-const abx=a.x-b.x,aby=a.y-b.y,cbx=c.x-b.x,cby=c.y-b.y;
+
+const abx=a.x-b.x;
+const aby=a.y-b.y;
+const cbx=c.x-b.x;
+const cby=c.y-b.y;
+
 const dot=abx*cbx+aby*cby;
-const mag1=Math.sqrt(abx*abx+aby*aby);
-const mag2=Math.sqrt(cbx*cbx+cby*cby);
+const mag1=Math.hypot(abx,aby);
+const mag2=Math.hypot(cbx,cby);
+
 if(!mag1||!mag2)return null;
+
 const cosine=Math.max(-1,Math.min(1,dot/(mag1*mag2)));
+
 return Math.acos(cosine)*180/Math.PI;
 }
 
-function trunkInclination(leftShoulder,rightShoulder,leftHip,rightHip){
-const sx=(leftShoulder.x+rightShoulder.x)/2;
-const sy=(leftShoulder.y+rightShoulder.y)/2;
-const hx=(leftHip.x+rightHip.x)/2;
-const hy=(leftHip.y+rightHip.y)/2;
-const dx=sx-hx;
-const dy=hy-sy;
-return Math.abs(Math.atan2(dx,dy)*180/Math.PI);
+function trunkInclination(ls,rs,lh,rh){
+const sx=(ls.x+rs.x)/2;
+const sy=(ls.y+rs.y)/2;
+const hx=(lh.x+rh.x)/2;
+const hy=(lh.y+rh.y)/2;
+
+return Math.abs(Math.atan2(sx-hx,hy-sy)*180/Math.PI);
 }
 
-function visibility(p){return p&&typeof p.visibility==="number"?p.visibility:1}
+function smoothing(key,value){
+if(value===null||!Number.isFinite(value))return null;
+
+if(smooth[key]===null){
+smooth[key]=value;
+return value;
+}
+
+smooth[key]=SMOOTH_ALPHA*value+(1-SMOOTH_ALPHA)*smooth[key];
+
+return smooth[key];
+}
+
+function resetSmoothing(){
+smooth.kneeLeft=null;
+smooth.kneeRight=null;
+smooth.hip=null;
+smooth.trunk=null;
+}
+
+function visibility(p){
+return p&&typeof p.visibility==="number"?p.visibility:1;
+}
 
 function calculateMetrics(lm){
-const leftKnee=angle3(lm[23],lm[25],lm[27]);
-const rightKnee=angle3(lm[24],lm[26],lm[28]);
-const leftHip=angle3(lm[11],lm[23],lm[25]);
-const rightHip=angle3(lm[12],lm[24],lm[26]);
-const hip=(leftHip+rightHip)/2;
-const trunk=trunkInclination(lm[11],lm[12],lm[23],lm[24]);
+
+const rawLeftKnee=angle3(lm[23],lm[25],lm[27]);
+const rawRightKnee=angle3(lm[24],lm[26],lm[28]);
+
+const rawLeftHip=angle3(lm[11],lm[23],lm[25]);
+const rawRightHip=angle3(lm[12],lm[24],lm[26]);
+
+const rawHip=(rawLeftHip+rawRightHip)/2;
+
+const rawTrunk=trunkInclination(lm[11],lm[12],lm[23],lm[24]);
+
+const leftKnee=smoothing("kneeLeft",rawLeftKnee);
+const rightKnee=smoothing("kneeRight",rawRightKnee);
+const hip=smoothing("hip",rawHip);
+const trunk=smoothing("trunk",rawTrunk);
 
 setAngle("kneeLeft",leftKnee);
 setAngle("kneeRight",rightKnee);
 setAngle("hipAngle",hip);
 setAngle("trunkAngle",trunk);
 
-updateQuality(lm);
 }
 
 function setAngle(id,value){
-document.getElementById(id).textContent=value!==null&&Number.isFinite(value)?Math.round(value)+"°":"—°";
+document.getElementById(id).textContent=
+value!==null&&Number.isFinite(value)
+?Math.round(value)+"°"
+:"—°";
 }
 
-function updateQuality(lm){
+function evaluatePosition(lm){
+
 const required=[11,12,23,24,25,26,27,28,29,30,31,32];
+
 let visible=0;
 let inside=0;
 
 required.forEach(i=>{
 const p=lm[i];
-if(visibility(p)>=.55)visible++;
-if(p&&p.x>.03&&p.x<.97&&p.y>.03&&p.y<.97)inside++;
+
+if(visibility(p)>=.60)visible++;
+
+if(
+p &&
+p.x>.04 &&
+p.x<.96 &&
+p.y>.04 &&
+p.y<.96
+)inside++;
 });
 
 const visibilityScore=visible/required.length;
 const insideScore=inside/required.length;
-const score=Math.round((visibilityScore*.6+insideScore*.4)*100);
+
+let orientationScore=1;
+
+if(plane==="frontal"){
+
+const shoulderWidth=Math.abs(lm[11].x-lm[12].x);
+const hipWidth=Math.abs(lm[23].x-lm[24].x);
+
+orientationScore=
+shoulderWidth>.07&&hipWidth>.045
+?1
+:.45;
+
+}else{
+
+const shoulderWidth=Math.abs(lm[11].x-lm[12].x);
+const hipWidth=Math.abs(lm[23].x-lm[24].x);
+
+orientationScore=
+shoulderWidth<.16&&hipWidth<.13
+?1
+:.55;
+}
+
+const score=Math.round(
+(
+visibilityScore*.45+
+insideScore*.40+
+orientationScore*.15
+)*100
+);
 
 document.getElementById("qualityValue").textContent=score+"%";
 document.getElementById("qualityFill").style.width=score+"%";
 
-let msg="Ajuste o posicionamento.";
+let valid=
+score>=88 &&
+visible===required.length &&
+inside===required.length;
 
-if(score>=90)msg="Enquadramento adequado para análise.";
-else if(inside<required.length)msg="Afaste-se: mantenha ombros, quadris, joelhos, tornozelos e pés dentro da imagem.";
-else if(visible<required.length)msg="Algumas articulações estão com baixa confiança de detecção.";
+if(valid){
+stableFrames++;
+}else{
+stableFrames=0;
+}
 
-document.getElementById("qualityMessage").textContent=msg;
+const stable=stableFrames>=15;
+
+document.getElementById("stabilityInfo").innerHTML=
+stable
+?'<span class="ok">ESTÁVEL</span>'
+:valid
+?'<span class="warn">ESTABILIZANDO...</span>'
+:'<span class="warn">AJUSTAR</span>';
+
+const status=document.getElementById("positionStatus");
+
+if(stable){
+
+status.textContent="POSICIONAMENTO VÁLIDO";
+status.classList.add("valid");
+
+document.getElementById("qualityMessage").textContent=
+"Posicionamento adequado e estável para iniciar a captura.";
+
+}else{
+
+status.textContent="POSICIONAMENTO NÃO VALIDADO";
+status.classList.remove("valid");
+
+if(inside<required.length){
+
+document.getElementById("qualityMessage").textContent=
+"Afaste-se da câmera: ombros, quadris, joelhos, tornozelos e pés precisam permanecer dentro da imagem.";
+
+}else if(visible<required.length){
+
+document.getElementById("qualityMessage").textContent=
+"Algumas articulações apresentam baixa confiança de detecção.";
+
+}else if(orientationScore<1){
+
+document.getElementById("qualityMessage").textContent=
+plane==="frontal"
+?"Ajuste o atleta para ficar de frente para a câmera."
+:"Ajuste o atleta para ficar de perfil para a câmera.";
+
+}else{
+
+document.getElementById("qualityMessage").textContent=
+"Mantenha a posição por alguns instantes para validar.";
+
+}
+}
+
+return stable;
 }
 
 async function predict(){
+
 if(!running||!poseLandmarker)return;
 
 if(video.currentTime!==lastVideoTime){
+
 lastVideoTime=video.currentTime;
 
-const result=poseLandmarker.detectForVideo(video,performance.now());
+const result=poseLandmarker.detectForVideo(
+video,
+performance.now()
+);
 
 ctx.clearRect(0,0,canvas.width,canvas.height);
 
 if(result.landmarks&&result.landmarks.length){
+
 const lm=result.landmarks[0];
 
 document.getElementById("bodyInfo").innerHTML='<span class="ok">DETECTADO</span>';
-document.getElementById("landmarkInfo").innerHTML='<span class="ok">'+lm.length+' / 33</span>';
+document.getElementById("landmarkInfo").innerHTML='<span class="ok">33 / 33</span>';
 
-const status=document.getElementById("poseStatus");
-status.textContent="CORPO DETECTADO";
-status.classList.add("detected");
+const poseStatus=document.getElementById("poseStatus");
+
+poseStatus.textContent="CORPO DETECTADO";
+poseStatus.classList.add("detected");
 
 drawPose(lm);
 calculateMetrics(lm);
+evaluatePosition(lm);
 
 }else{
-resetMetrics();
+
+resetAnalysis();
 
 document.getElementById("bodyInfo").innerHTML='<span class="warn">NÃO DETECTADO</span>';
 document.getElementById("landmarkInfo").textContent="0 / 33";
 
-const status=document.getElementById("poseStatus");
-status.textContent="AGUARDANDO CORPO";
-status.classList.remove("detected");
+const poseStatus=document.getElementById("poseStatus");
+
+poseStatus.textContent="AGUARDANDO CORPO";
+poseStatus.classList.remove("detected");
+
 }
 
 frames++;
+
 const now=performance.now();
 
 if(now-fpsTime>=1000){
+
 document.getElementById("fpsInfo").textContent=frames+" FPS";
+
 frames=0;
 fpsTime=now;
+
 }
+
 }
 
 requestAnimationFrame(predict);
 }
 
 function drawPose(lm){
+
 ctx.lineWidth=4;
 ctx.strokeStyle="#49aaff";
 ctx.fillStyle="#7ee7ff";
 
 connections.forEach(([i,j])=>{
-const a=lm[i],b=lm[j];
+
+const a=lm[i];
+const b=lm[j];
+
 if(!a||!b)return;
+
 ctx.beginPath();
-ctx.moveTo(a.x*canvas.width,a.y*canvas.height);
-ctx.lineTo(b.x*canvas.width,b.y*canvas.height);
+
+ctx.moveTo(
+a.x*canvas.width,
+a.y*canvas.height
+);
+
+ctx.lineTo(
+b.x*canvas.width,
+b.y*canvas.height
+);
+
 ctx.stroke();
+
 });
 
 lm.forEach(p=>{
+
 ctx.beginPath();
-ctx.arc(p.x*canvas.width,p.y*canvas.height,4,0,Math.PI*2);
+
+ctx.arc(
+p.x*canvas.width,
+p.y*canvas.height,
+4,
+0,
+Math.PI*2
+);
+
 ctx.fill();
+
 });
+
 }
 
-function resetMetrics(){
-["kneeLeft","kneeRight","hipAngle","trunkAngle"].forEach(id=>document.getElementById(id).textContent="—°");
+function resetAnalysis(){
+
+stableFrames=0;
+
+resetSmoothing();
+
+["kneeLeft","kneeRight","hipAngle","trunkAngle"].forEach(
+id=>document.getElementById(id).textContent="—°"
+);
+
 document.getElementById("qualityValue").textContent="0%";
 document.getElementById("qualityFill").style.width="0";
 document.getElementById("qualityMessage").textContent="Corpo não detectado.";
+document.getElementById("stabilityInfo").textContent="Aguardando";
+
+const status=document.getElementById("positionStatus");
+
+status.textContent="POSICIONAMENTO NÃO VALIDADO";
+status.classList.remove("valid");
+
 }
 
 function stopCamera(){
+
 running=false;
 
 if(stream){
-stream.getTracks().forEach(t=>t.stop());
+
+stream.getTracks().forEach(
+track=>track.stop()
+);
+
 stream=null;
+
 }
 
 video.srcObject=null;
 video.style.display="none";
 
-ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
 
 document.getElementById("placeholder").style.display="flex";
 
@@ -361,17 +638,20 @@ document.getElementById("bodyInfo").textContent="Não detectado";
 document.getElementById("landmarkInfo").textContent="0 / 33";
 document.getElementById("fpsInfo").textContent="—";
 
-resetMetrics();
+resetAnalysis();
 
 document.getElementById("startBtn").disabled=false;
 document.getElementById("stopBtn").disabled=true;
+
 }
 
 window.startCamera=startCamera;
 window.stopCamera=stopCamera;
+window.setPlane=setPlane;
 
 initMediaPipe();
 
 </script>
+
 </body>
 </html>
