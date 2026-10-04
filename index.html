@@ -4,19 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>TIME JUNDIAÍ PERFORMANCE | Motor Biomecânico</title>
-
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,sans-serif;background:#07111d;color:#fff;min-height:100vh}
 header{height:72px;background:#0b1d30;border-bottom:1px solid #18344f;display:flex;align-items:center;padding:0 32px}
-.brand{font-size:20px;font-weight:800;letter-spacing:.5px}
-.brand span{color:#48a9ff}
-main{max-width:1300px;margin:auto;padding:32px}
-.top{margin-bottom:24px}
+.brand{font-size:20px;font-weight:800;letter-spacing:.5px}.brand span{color:#48a9ff}
+main{max-width:1400px;margin:auto;padding:32px}.top{margin-bottom:24px}
 .tag{display:inline-block;background:#102b45;color:#73bdff;border:1px solid #214e72;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:12px}
-h1{font-size:30px;margin-bottom:8px}
-.subtitle{color:#91a4b8;font-size:15px}
-.grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(300px,1fr);gap:22px}
+h1{font-size:30px;margin-bottom:8px}.subtitle{color:#91a4b8;font-size:15px}
+.grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(320px,1fr);gap:22px}
 .card{background:#0c1928;border:1px solid #1a3045;border-radius:16px;padding:20px}
 .camera{position:relative;width:100%;aspect-ratio:16/9;background:#030a11;border-radius:12px;overflow:hidden}
 video{position:absolute;width:100%;height:100%;object-fit:cover;display:none}
@@ -24,62 +20,52 @@ canvas{position:absolute;width:100%;height:100%;left:0;top:0;pointer-events:none
 .placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;color:#64788c}
 .placeholderIcon{width:64px;height:64px;border:2px solid #244764;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 15px;font-size:25px}
 .badge{position:absolute;top:14px;z-index:5;border-radius:20px;padding:7px 12px;font-size:11px;font-weight:800}
-.cameraStatus{left:14px;background:#151d25;border:1px solid #34404b}
-.cameraStatus.on{background:#103b28;border-color:#1d754b;color:#72e5a6}
-.poseStatus{right:14px;background:#382515;border:1px solid #75502a;color:#ffc47c}
-.poseStatus.detected{background:#103b28;border-color:#1d754b;color:#72e5a6}
+.cameraStatus{left:14px;background:#151d25;border:1px solid #34404b}.cameraStatus.on{background:#103b28;border-color:#1d754b;color:#72e5a6}
+.poseStatus{right:14px;background:#382515;border:1px solid #75502a;color:#ffc47c}.poseStatus.detected{background:#103b28;border-color:#1d754b;color:#72e5a6}
 .controls{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
 button{border:0;border-radius:9px;padding:12px 18px;font-weight:700;cursor:pointer;font-size:14px}
-.primary{background:#1677d2;color:#fff}
-.secondary{background:#17283a;color:#d7e5f2;border:1px solid #29445e}
+.primary{background:#1677d2;color:#fff}.secondary{background:#17283a;color:#d7e5f2;border:1px solid #29445e}
 button:disabled{opacity:.45;cursor:not-allowed}
-.sideTitle{font-size:17px;font-weight:800;margin-bottom:18px}
-.info{padding:14px 0;border-bottom:1px solid #1a3045}
-.info:last-child{border:0}
-.label{font-size:11px;text-transform:uppercase;color:#71869a;font-weight:700;margin-bottom:6px}
-.value{font-size:14px;color:#e7f0f8;word-break:break-word}
-.ok{color:#61dc9b}
-.warn{color:#ffc46b}
-.error{color:#ff7777}
+.sideTitle{font-size:17px;font-weight:800;margin-bottom:16px}
+.qualityBox{background:#101f2e;border:1px solid #203b55;border-radius:12px;padding:14px;margin-bottom:18px}
+.qualityTop{display:flex;justify-content:space-between;gap:12px;margin-bottom:9px;font-size:13px;font-weight:700}
+.qualityBar{height:7px;background:#1b2b3b;border-radius:10px;overflow:hidden}.qualityFill{height:100%;width:0;background:#54d796;transition:.2s}
+.qualityMessage{font-size:12px;color:#8fa5b9;margin-top:9px;line-height:1.4}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.metric{background:#101f2e;border:1px solid #20384e;border-radius:12px;padding:14px}
+.metricLabel{font-size:10px;color:#7f95a9;text-transform:uppercase;font-weight:800;margin-bottom:7px}
+.metricValue{font-size:25px;font-weight:800}.metricSub{font-size:11px;color:#72879a;margin-top:4px}
+.info{padding:13px 0;border-bottom:1px solid #1a3045}.info:last-child{border:0}
+.label{font-size:10px;text-transform:uppercase;color:#71869a;font-weight:700;margin-bottom:5px}
+.value{font-size:13px;color:#e7f0f8}.ok{color:#61dc9b}.warn{color:#ffc46b}.error{color:#ff7777}
 .message{margin-top:16px;padding:13px;border-radius:9px;background:#101f2e;color:#91a4b8;font-size:13px;line-height:1.5}
-.loading{color:#73bdff}
-@media(max-width:800px){main{padding:20px}.grid{grid-template-columns:1fr}header{padding:0 20px}.brand{font-size:17px}}
+@media(max-width:850px){main{padding:18px}.grid{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}header{padding:0 18px}}
 </style>
 </head>
 
 <body>
-
-<header>
-<div class="brand">TIME JUNDIAÍ <span>PERFORMANCE</span></div>
-</header>
+<header><div class="brand">TIME JUNDIAÍ <span>PERFORMANCE</span></div></header>
 
 <main>
-
 <div class="top">
-<div class="tag">MOTOR BIOMECÂNICO • MVP 0.2</div>
-<h1>Detecção corporal</h1>
-<div class="subtitle">MediaPipe Pose Landmarker — rastreamento corporal em tempo real.</div>
+<div class="tag">MOTOR BIOMECÂNICO • MVP 0.3</div>
+<h1>Biomecânica em tempo real</h1>
+<div class="subtitle">TJP-SQUAT-01 • Validação inicial dos ângulos articulares e qualidade do enquadramento.</div>
 </div>
 
 <div class="grid">
 
 <div class="card">
-
 <div class="camera">
-
 <video id="camera" autoplay playsinline muted></video>
 <canvas id="overlay"></canvas>
 
 <div class="placeholder" id="placeholder">
-<div>
-<div class="placeholderIcon">◎</div>
-<div>Câmera ainda não iniciada</div>
-</div>
+<div><div class="placeholderIcon">◎</div><div>Câmera ainda não iniciada</div></div>
 </div>
 
 <div class="badge cameraStatus" id="cameraStatus">CÂMERA DESLIGADA</div>
 <div class="badge poseStatus" id="poseStatus">AGUARDANDO CORPO</div>
-
 </div>
 
 <div class="controls">
@@ -87,24 +73,45 @@ button:disabled{opacity:.45;cursor:not-allowed}
 <button class="secondary" id="stopBtn" onclick="stopCamera()" disabled>Parar câmera</button>
 </div>
 
-<div class="message" id="message">
-Carregando o motor MediaPipe...
-</div>
-
+<div class="message" id="message">Carregando o motor biomecânico...</div>
 </div>
 
 <div class="card">
 
-<div class="sideTitle">Análise em tempo real</div>
+<div class="sideTitle">Análise biomecânica</div>
 
-<div class="info">
-<div class="label">Motor</div>
-<div class="value" id="engine"><span class="loading">Carregando...</span></div>
+<div class="qualityBox">
+<div class="qualityTop"><span>Qualidade do enquadramento</span><span id="qualityValue">0%</span></div>
+<div class="qualityBar"><div class="qualityFill" id="qualityFill"></div></div>
+<div class="qualityMessage" id="qualityMessage">Aguardando câmera.</div>
 </div>
 
-<div class="info">
-<div class="label">Câmera</div>
-<div class="value" id="cameraInfo">Aguardando</div>
+<div class="metrics">
+
+<div class="metric">
+<div class="metricLabel">Joelho esquerdo</div>
+<div class="metricValue" id="kneeLeft">—°</div>
+<div class="metricSub">Quadril • joelho • tornozelo</div>
+</div>
+
+<div class="metric">
+<div class="metricLabel">Joelho direito</div>
+<div class="metricValue" id="kneeRight">—°</div>
+<div class="metricSub">Quadril • joelho • tornozelo</div>
+</div>
+
+<div class="metric">
+<div class="metricLabel">Quadril</div>
+<div class="metricValue" id="hipAngle">—°</div>
+<div class="metricSub">Média bilateral</div>
+</div>
+
+<div class="metric">
+<div class="metricLabel">Inclinação do tronco</div>
+<div class="metricValue" id="trunkAngle">—°</div>
+<div class="metricSub">Referência vertical 2D</div>
+</div>
+
 </div>
 
 <div class="info">
@@ -123,22 +130,17 @@ Carregando o motor MediaPipe...
 </div>
 
 <div class="info">
-<div class="label">Contexto</div>
-<div class="value" id="contextInfo">Verificando...</div>
+<div class="label">Motor</div>
+<div class="value" id="engine">Carregando...</div>
 </div>
 
 </div>
-
 </div>
 </main>
 
 <script type="module">
 
-import {
-PoseLandmarker,
-FilesetResolver,
-DrawingUtils
-} from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22-rc.20250304/+esm";
+import {PoseLandmarker,FilesetResolver} from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22-rc.20250304/+esm";
 
 let poseLandmarker=null;
 let stream=null;
@@ -151,108 +153,118 @@ const video=document.getElementById("camera");
 const canvas=document.getElementById("overlay");
 const ctx=canvas.getContext("2d");
 
-const connections=[
-[11,12],[11,13],[13,15],[12,14],[14,16],
-[11,23],[12,24],[23,24],
-[23,25],[25,27],[27,29],[29,31],
-[24,26],[26,28],[28,30],[30,32]
-];
+const connections=[[11,12],[11,13],[13,15],[12,14],[14,16],[11,23],[12,24],[23,24],[23,25],[25,27],[27,29],[29,31],[24,26],[26,28],[28,30],[30,32]];
 
 async function initMediaPipe(){
-
 try{
-
-document.getElementById("contextInfo").innerHTML=
-window.isSecureContext&&window.self===window.top
-?'<span class="ok">HTTPS • PÁGINA PRINCIPAL</span>'
-:'<span class="error">CONTEXTO RESTRITO</span>';
-
-const vision=await FilesetResolver.forVisionTasks(
-"https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22-rc.20250304/wasm"
-);
-
-poseLandmarker=await PoseLandmarker.createFromOptions(vision,{
-baseOptions:{
-modelAssetPath:
-"https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/latest/pose_landmarker_lite.task",
-delegate:"GPU"
-},
-runningMode:"VIDEO",
-numPoses:1,
-minPoseDetectionConfidence:.5,
-minPosePresenceConfidence:.5,
-minTrackingConfidence:.5
-});
-
+const vision=await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22-rc.20250304/wasm");
+poseLandmarker=await PoseLandmarker.createFromOptions(vision,{baseOptions:{modelAssetPath:"https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/latest/pose_landmarker_lite.task",delegate:"GPU"},runningMode:"VIDEO",numPoses:1,minPoseDetectionConfidence:.5,minPosePresenceConfidence:.5,minTrackingConfidence:.5});
 document.getElementById("engine").innerHTML='<span class="ok">MEDIAPIPE ATIVO</span>';
-document.getElementById("message").innerHTML='<strong>Motor carregado.</strong> Inicie a câmera e posicione uma pessoa com o corpo visível.';
+document.getElementById("message").innerHTML='<strong>Motor pronto.</strong> Inicie a câmera e mantenha o corpo inteiro visível.';
 document.getElementById("startBtn").disabled=false;
-
 }catch(e){
-
 console.error(e);
-
-document.getElementById("engine").innerHTML='<span class="error">ERRO AO CARREGAR</span>';
-document.getElementById("message").innerHTML='<strong>Erro MediaPipe:</strong> '+e.message;
-
+document.getElementById("engine").innerHTML='<span class="error">ERRO: '+e.message+'</span>';
+document.getElementById("message").innerHTML='<strong>Falha ao carregar MediaPipe.</strong>';
 }
-
 }
 
 async function startCamera(){
-
 if(stream)return;
-
 try{
-
-stream=await navigator.mediaDevices.getUserMedia({
-audio:false,
-video:{
-width:{ideal:1280},
-height:{ideal:720}
-}
-});
-
+stream=await navigator.mediaDevices.getUserMedia({audio:false,video:{width:{ideal:1280},height:{ideal:720}}});
 video.srcObject=stream;
-
 await video.play();
-
 video.style.display="block";
 document.getElementById("placeholder").style.display="none";
-
 document.getElementById("cameraStatus").textContent="CÂMERA ATIVA";
 document.getElementById("cameraStatus").classList.add("on");
-
-document.getElementById("cameraInfo").innerHTML='<span class="ok">ATIVA</span>';
-
 document.getElementById("startBtn").disabled=true;
 document.getElementById("stopBtn").disabled=false;
-
 canvas.width=video.videoWidth;
 canvas.height=video.videoHeight;
-
 running=true;
 lastVideoTime=-1;
-
 requestAnimationFrame(predict);
-
 }catch(e){
-
-console.error(e);
-
-document.getElementById("cameraInfo").innerHTML='<span class="error">'+e.name+'</span>';
-document.getElementById("message").innerHTML='<strong>Falha na câmera:</strong> '+e.message;
-
+document.getElementById("message").innerHTML='<strong>Falha na câmera:</strong> '+e.name+' — '+e.message;
+}
 }
 
+function angle3(a,b,c){
+if(!a||!b||!c)return null;
+const abx=a.x-b.x,aby=a.y-b.y,cbx=c.x-b.x,cby=c.y-b.y;
+const dot=abx*cbx+aby*cby;
+const mag1=Math.sqrt(abx*abx+aby*aby);
+const mag2=Math.sqrt(cbx*cbx+cby*cby);
+if(!mag1||!mag2)return null;
+const cosine=Math.max(-1,Math.min(1,dot/(mag1*mag2)));
+return Math.acos(cosine)*180/Math.PI;
+}
+
+function trunkInclination(leftShoulder,rightShoulder,leftHip,rightHip){
+const sx=(leftShoulder.x+rightShoulder.x)/2;
+const sy=(leftShoulder.y+rightShoulder.y)/2;
+const hx=(leftHip.x+rightHip.x)/2;
+const hy=(leftHip.y+rightHip.y)/2;
+const dx=sx-hx;
+const dy=hy-sy;
+return Math.abs(Math.atan2(dx,dy)*180/Math.PI);
+}
+
+function visibility(p){return p&&typeof p.visibility==="number"?p.visibility:1}
+
+function calculateMetrics(lm){
+const leftKnee=angle3(lm[23],lm[25],lm[27]);
+const rightKnee=angle3(lm[24],lm[26],lm[28]);
+const leftHip=angle3(lm[11],lm[23],lm[25]);
+const rightHip=angle3(lm[12],lm[24],lm[26]);
+const hip=(leftHip+rightHip)/2;
+const trunk=trunkInclination(lm[11],lm[12],lm[23],lm[24]);
+
+setAngle("kneeLeft",leftKnee);
+setAngle("kneeRight",rightKnee);
+setAngle("hipAngle",hip);
+setAngle("trunkAngle",trunk);
+
+updateQuality(lm);
+}
+
+function setAngle(id,value){
+document.getElementById(id).textContent=value!==null&&Number.isFinite(value)?Math.round(value)+"°":"—°";
+}
+
+function updateQuality(lm){
+const required=[11,12,23,24,25,26,27,28,29,30,31,32];
+let visible=0;
+let inside=0;
+
+required.forEach(i=>{
+const p=lm[i];
+if(visibility(p)>=.55)visible++;
+if(p&&p.x>.03&&p.x<.97&&p.y>.03&&p.y<.97)inside++;
+});
+
+const visibilityScore=visible/required.length;
+const insideScore=inside/required.length;
+const score=Math.round((visibilityScore*.6+insideScore*.4)*100);
+
+document.getElementById("qualityValue").textContent=score+"%";
+document.getElementById("qualityFill").style.width=score+"%";
+
+let msg="Ajuste o posicionamento.";
+
+if(score>=90)msg="Enquadramento adequado para análise.";
+else if(inside<required.length)msg="Afaste-se: mantenha ombros, quadris, joelhos, tornozelos e pés dentro da imagem.";
+else if(visible<required.length)msg="Algumas articulações estão com baixa confiança de detecção.";
+
+document.getElementById("qualityMessage").textContent=msg;
 }
 
 async function predict(){
-
 if(!running||!poseLandmarker)return;
 
 if(video.currentTime!==lastVideoTime){
-
 lastVideoTime=video.currentTime;
 
 const result=poseLandmarker.detectForVideo(video,performance.now());
@@ -260,96 +272,76 @@ const result=poseLandmarker.detectForVideo(video,performance.now());
 ctx.clearRect(0,0,canvas.width,canvas.height);
 
 if(result.landmarks&&result.landmarks.length){
-
-const landmarks=result.landmarks[0];
+const lm=result.landmarks[0];
 
 document.getElementById("bodyInfo").innerHTML='<span class="ok">DETECTADO</span>';
-document.getElementById("landmarkInfo").innerHTML='<span class="ok">'+landmarks.length+' / 33</span>';
+document.getElementById("landmarkInfo").innerHTML='<span class="ok">'+lm.length+' / 33</span>';
 
-const poseStatus=document.getElementById("poseStatus");
-poseStatus.textContent="CORPO DETECTADO";
-poseStatus.classList.add("detected");
+const status=document.getElementById("poseStatus");
+status.textContent="CORPO DETECTADO";
+status.classList.add("detected");
 
-drawPose(landmarks);
+drawPose(lm);
+calculateMetrics(lm);
 
 }else{
+resetMetrics();
 
 document.getElementById("bodyInfo").innerHTML='<span class="warn">NÃO DETECTADO</span>';
 document.getElementById("landmarkInfo").textContent="0 / 33";
 
-const poseStatus=document.getElementById("poseStatus");
-poseStatus.textContent="AGUARDANDO CORPO";
-poseStatus.classList.remove("detected");
-
+const status=document.getElementById("poseStatus");
+status.textContent="AGUARDANDO CORPO";
+status.classList.remove("detected");
 }
 
 frames++;
-
 const now=performance.now();
 
 if(now-fpsTime>=1000){
-
 document.getElementById("fpsInfo").textContent=frames+" FPS";
-
 frames=0;
 fpsTime=now;
-
 }
-
 }
 
 requestAnimationFrame(predict);
-
 }
 
-function drawPose(landmarks){
-
+function drawPose(lm){
 ctx.lineWidth=4;
 ctx.strokeStyle="#49aaff";
 ctx.fillStyle="#7ee7ff";
 
-connections.forEach(pair=>{
-
-const a=landmarks[pair[0]];
-const b=landmarks[pair[1]];
-
+connections.forEach(([i,j])=>{
+const a=lm[i],b=lm[j];
 if(!a||!b)return;
-
 ctx.beginPath();
 ctx.moveTo(a.x*canvas.width,a.y*canvas.height);
 ctx.lineTo(b.x*canvas.width,b.y*canvas.height);
 ctx.stroke();
-
 });
 
-landmarks.forEach((p,i)=>{
-
-if(i>32)return;
-
+lm.forEach(p=>{
 ctx.beginPath();
-ctx.arc(
-p.x*canvas.width,
-p.y*canvas.height,
-i===11||i===12||i===23||i===24||i===25||i===26||i===27||i===28?6:4,
-0,
-Math.PI*2
-);
-
+ctx.arc(p.x*canvas.width,p.y*canvas.height,4,0,Math.PI*2);
 ctx.fill();
-
 });
+}
 
+function resetMetrics(){
+["kneeLeft","kneeRight","hipAngle","trunkAngle"].forEach(id=>document.getElementById(id).textContent="—°");
+document.getElementById("qualityValue").textContent="0%";
+document.getElementById("qualityFill").style.width="0";
+document.getElementById("qualityMessage").textContent="Corpo não detectado.";
 }
 
 function stopCamera(){
-
 running=false;
 
 if(stream){
-
-stream.getTracks().forEach(track=>track.stop());
+stream.getTracks().forEach(t=>t.stop());
 stream=null;
-
 }
 
 video.srcObject=null;
@@ -365,14 +357,14 @@ document.getElementById("cameraStatus").classList.remove("on");
 document.getElementById("poseStatus").textContent="AGUARDANDO CORPO";
 document.getElementById("poseStatus").classList.remove("detected");
 
-document.getElementById("cameraInfo").textContent="Aguardando";
 document.getElementById("bodyInfo").textContent="Não detectado";
 document.getElementById("landmarkInfo").textContent="0 / 33";
 document.getElementById("fpsInfo").textContent="—";
 
+resetMetrics();
+
 document.getElementById("startBtn").disabled=false;
 document.getElementById("stopBtn").disabled=true;
-
 }
 
 window.startCamera=startCamera;
@@ -381,6 +373,5 @@ window.stopCamera=stopCamera;
 initMediaPipe();
 
 </script>
-
 </body>
 </html>
