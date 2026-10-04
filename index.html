@@ -453,7 +453,7 @@ document.getElementById("qualityMessage").textContent="Mantenha a posição para
 return positionValid;
 }
 
-function toggleCapture(){
+async function toggleCapture(){
 
 if(captureActive){
 stopCapture();
@@ -461,9 +461,52 @@ return;
 }
 
 if(!positionValid){
-document.getElementById("message").textContent="Valide o posicionamento antes de iniciar.";
+document.getElementById("message").innerHTML="<strong>Posicione-se corretamente primeiro.</strong> Aguarde aparecer POSICIONAMENTO VÁLIDO.";
 return;
 }
+
+document.getElementById("captureBtn").disabled=true;
+document.getElementById("frontalBtn").disabled=true;
+document.getElementById("lateralBtn").disabled=true;
+
+let seconds=5;
+
+setState(seconds);
+
+document.getElementById("message").innerHTML="<strong>Prepare-se.</strong> A captura começará automaticamente em "+seconds+" segundos.";
+
+const countdown=setInterval(()=>{
+
+seconds--;
+
+if(seconds>0){
+
+setState(seconds);
+
+document.getElementById("message").innerHTML="<strong>Prepare-se.</strong> A captura começará automaticamente em "+seconds+" segundos.";
+
+return;
+}
+
+clearInterval(countdown);
+
+setState("AGUARDANDO");
+
+document.getElementById("message").innerHTML="<strong>Vá para a posição.</strong> O sistema começará assim que reconhecer novamente o posicionamento válido.";
+
+const waitForPosition=setInterval(()=>{
+
+if(!running){
+clearInterval(waitForPosition);
+document.getElementById("captureBtn").disabled=false;
+document.getElementById("frontalBtn").disabled=false;
+document.getElementById("lateralBtn").disabled=false;
+return;
+}
+
+if(!positionValid)return;
+
+clearInterval(waitForPosition);
 
 captureActive=true;
 repCount=0;
@@ -477,13 +520,19 @@ updateRepUI();
 
 document.getElementById("captureBtn").textContent="Cancelar captura";
 document.getElementById("captureBtn").classList.add("active");
+document.getElementById("captureBtn").disabled=false;
 
-document.getElementById("frontalBtn").disabled=true;
-document.getElementById("lateralBtn").disabled=true;
+setState("PODE COMEÇAR");
 
-setState("EM PÉ");
+document.getElementById("message").innerHTML="<strong>PODE COMEÇAR.</strong> Faça 3 agachamentos completos em ritmo natural.";
 
-document.getElementById("message").innerHTML="<strong>Captura iniciada.</strong> Realize 3 agachamentos completos em ritmo natural.";
+setTimeout(()=>{
+if(captureActive&&movementState==="STANDING")setState("EM PÉ");
+},1000);
+
+},100);
+
+},1000);
 
 }
 
