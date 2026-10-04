@@ -4,42 +4,49 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>TIME JUNDIAÍ PERFORMANCE | Motor Biomecânico</title>
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,sans-serif;background:#07111d;color:#fff;min-height:100vh}
 header{height:72px;background:#0b1d30;border-bottom:1px solid #18344f;display:flex;align-items:center;padding:0 32px}
 .brand{font-size:20px;font-weight:800;letter-spacing:.5px}
 .brand span{color:#48a9ff}
-main{max-width:1200px;margin:auto;padding:32px}
+main{max-width:1300px;margin:auto;padding:32px}
 .top{margin-bottom:24px}
 .tag{display:inline-block;background:#102b45;color:#73bdff;border:1px solid #214e72;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:12px}
 h1{font-size:30px;margin-bottom:8px}
 .subtitle{color:#91a4b8;font-size:15px}
-.grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(280px,1fr);gap:22px}
+.grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(300px,1fr);gap:22px}
 .card{background:#0c1928;border:1px solid #1a3045;border-radius:16px;padding:20px}
-.camera{position:relative;width:100%;aspect-ratio:16/9;background:#030a11;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center}
-video{width:100%;height:100%;object-fit:cover;display:none}
-.placeholder{text-align:center;color:#64788c}
+.camera{position:relative;width:100%;aspect-ratio:16/9;background:#030a11;border-radius:12px;overflow:hidden}
+video{position:absolute;width:100%;height:100%;object-fit:cover;display:none}
+canvas{position:absolute;width:100%;height:100%;left:0;top:0;pointer-events:none}
+.placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;color:#64788c}
 .placeholderIcon{width:64px;height:64px;border:2px solid #244764;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 15px;font-size:25px}
-.status{position:absolute;top:14px;left:14px;background:#151d25;border:1px solid #34404b;border-radius:20px;padding:7px 12px;font-size:11px;font-weight:800}
-.status.on{background:#103b28;border-color:#1d754b;color:#72e5a6}
-.controls{display:flex;gap:10px;margin-top:16px}
+.badge{position:absolute;top:14px;z-index:5;border-radius:20px;padding:7px 12px;font-size:11px;font-weight:800}
+.cameraStatus{left:14px;background:#151d25;border:1px solid #34404b}
+.cameraStatus.on{background:#103b28;border-color:#1d754b;color:#72e5a6}
+.poseStatus{right:14px;background:#382515;border:1px solid #75502a;color:#ffc47c}
+.poseStatus.detected{background:#103b28;border-color:#1d754b;color:#72e5a6}
+.controls{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
 button{border:0;border-radius:9px;padding:12px 18px;font-weight:700;cursor:pointer;font-size:14px}
 .primary{background:#1677d2;color:#fff}
-.primary:hover{background:#2188e7}
 .secondary{background:#17283a;color:#d7e5f2;border:1px solid #29445e}
 button:disabled{opacity:.45;cursor:not-allowed}
-.sideTitle{font-size:16px;font-weight:800;margin-bottom:18px}
+.sideTitle{font-size:17px;font-weight:800;margin-bottom:18px}
 .info{padding:14px 0;border-bottom:1px solid #1a3045}
 .info:last-child{border:0}
 .label{font-size:11px;text-transform:uppercase;color:#71869a;font-weight:700;margin-bottom:6px}
 .value{font-size:14px;color:#e7f0f8;word-break:break-word}
 .ok{color:#61dc9b}
+.warn{color:#ffc46b}
 .error{color:#ff7777}
 .message{margin-top:16px;padding:13px;border-radius:9px;background:#101f2e;color:#91a4b8;font-size:13px;line-height:1.5}
+.loading{color:#73bdff}
 @media(max-width:800px){main{padding:20px}.grid{grid-template-columns:1fr}header{padding:0 20px}.brand{font-size:17px}}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -47,145 +54,332 @@ button:disabled{opacity:.45;cursor:not-allowed}
 </header>
 
 <main>
+
 <div class="top">
-<div class="tag">MOTOR BIOMECÂNICO • MVP 0.1</div>
-<h1>Teste de câmera</h1>
-<div class="subtitle">Primeira validação do ambiente externo para captura biomecânica.</div>
+<div class="tag">MOTOR BIOMECÂNICO • MVP 0.2</div>
+<h1>Detecção corporal</h1>
+<div class="subtitle">MediaPipe Pose Landmarker — rastreamento corporal em tempo real.</div>
 </div>
 
 <div class="grid">
 
 <div class="card">
+
 <div class="camera">
+
 <video id="camera" autoplay playsinline muted></video>
+<canvas id="overlay"></canvas>
 
 <div class="placeholder" id="placeholder">
+<div>
 <div class="placeholderIcon">◎</div>
 <div>Câmera ainda não iniciada</div>
 </div>
+</div>
 
-<div class="status" id="status">CÂMERA DESLIGADA</div>
+<div class="badge cameraStatus" id="cameraStatus">CÂMERA DESLIGADA</div>
+<div class="badge poseStatus" id="poseStatus">AGUARDANDO CORPO</div>
+
 </div>
 
 <div class="controls">
-<button class="primary" id="startBtn" onclick="startCamera()">Iniciar câmera</button>
+<button class="primary" id="startBtn" onclick="startCamera()" disabled>Iniciar câmera</button>
 <button class="secondary" id="stopBtn" onclick="stopCamera()" disabled>Parar câmera</button>
 </div>
 
 <div class="message" id="message">
-Clique em <strong>Iniciar câmera</strong>. O navegador deverá solicitar autorização para utilizar a webcam.
+Carregando o motor MediaPipe...
 </div>
+
 </div>
 
 <div class="card">
-<div class="sideTitle">Diagnóstico</div>
+
+<div class="sideTitle">Análise em tempo real</div>
 
 <div class="info">
-<div class="label">Contexto seguro HTTPS</div>
-<div class="value" id="secure">Verificando...</div>
-</div>
-
-<div class="info">
-<div class="label">getUserMedia</div>
-<div class="value" id="media">Verificando...</div>
+<div class="label">Motor</div>
+<div class="value" id="engine"><span class="loading">Carregando...</span></div>
 </div>
 
 <div class="info">
-<div class="label">Execução</div>
-<div class="value" id="frame">Verificando...</div>
+<div class="label">Câmera</div>
+<div class="value" id="cameraInfo">Aguardando</div>
 </div>
 
 <div class="info">
-<div class="label">Origem</div>
-<div class="value" id="origin">—</div>
+<div class="label">Corpo</div>
+<div class="value" id="bodyInfo">Não detectado</div>
 </div>
 
 <div class="info">
-<div class="label">Status</div>
-<div class="value" id="result">Aguardando teste</div>
+<div class="label">Landmarks</div>
+<div class="value" id="landmarkInfo">0 / 33</div>
+</div>
+
+<div class="info">
+<div class="label">FPS de análise</div>
+<div class="value" id="fpsInfo">—</div>
+</div>
+
+<div class="info">
+<div class="label">Contexto</div>
+<div class="value" id="contextInfo">Verificando...</div>
 </div>
 
 </div>
+
 </div>
 </main>
 
-<script>
-let stream=null;
+<script type="module">
 
-function diagnostics(){
-document.getElementById('secure').innerHTML=window.isSecureContext?'<span class="ok">SIM</span>':'<span class="error">NÃO</span>';
-document.getElementById('media').innerHTML=navigator.mediaDevices&&navigator.mediaDevices.getUserMedia?'<span class="ok">DISPONÍVEL</span>':'<span class="error">INDISPONÍVEL</span>';
-document.getElementById('frame').innerHTML=window.self===window.top?'<span class="ok">PÁGINA PRINCIPAL</span>':'<span class="error">IFRAME</span>';
-document.getElementById('origin').textContent=location.origin;
+import {
+PoseLandmarker,
+FilesetResolver,
+DrawingUtils
+} from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22-rc.20250304/+esm";
+
+let poseLandmarker=null;
+let stream=null;
+let running=false;
+let lastVideoTime=-1;
+let frames=0;
+let fpsTime=performance.now();
+
+const video=document.getElementById("camera");
+const canvas=document.getElementById("overlay");
+const ctx=canvas.getContext("2d");
+
+const connections=[
+[11,12],[11,13],[13,15],[12,14],[14,16],
+[11,23],[12,24],[23,24],
+[23,25],[25,27],[27,29],[29,31],
+[24,26],[26,28],[28,30],[30,32]
+];
+
+async function initMediaPipe(){
+
+try{
+
+document.getElementById("contextInfo").innerHTML=
+window.isSecureContext&&window.self===window.top
+?'<span class="ok">HTTPS • PÁGINA PRINCIPAL</span>'
+:'<span class="error">CONTEXTO RESTRITO</span>';
+
+const vision=await FilesetResolver.forVisionTasks(
+"https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22-rc.20250304/wasm"
+);
+
+poseLandmarker=await PoseLandmarker.createFromOptions(vision,{
+baseOptions:{
+modelAssetPath:
+"https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/latest/pose_landmarker_lite.task",
+delegate:"GPU"
+},
+runningMode:"VIDEO",
+numPoses:1,
+minPoseDetectionConfidence:.5,
+minPosePresenceConfidence:.5,
+minTrackingConfidence:.5
+});
+
+document.getElementById("engine").innerHTML='<span class="ok">MEDIAPIPE ATIVO</span>';
+document.getElementById("message").innerHTML='<strong>Motor carregado.</strong> Inicie a câmera e posicione uma pessoa com o corpo visível.';
+document.getElementById("startBtn").disabled=false;
+
+}catch(e){
+
+console.error(e);
+
+document.getElementById("engine").innerHTML='<span class="error">ERRO AO CARREGAR</span>';
+document.getElementById("message").innerHTML='<strong>Erro MediaPipe:</strong> '+e.message;
+
+}
+
 }
 
 async function startCamera(){
+
 if(stream)return;
 
-const result=document.getElementById('result');
-const message=document.getElementById('message');
-
 try{
-if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
-throw new Error('getUserMedia não disponível neste navegador.');
-}
-
-result.textContent='Solicitando acesso...';
 
 stream=await navigator.mediaDevices.getUserMedia({
 audio:false,
-video:true
+video:{
+width:{ideal:1280},
+height:{ideal:720}
+}
 });
 
-const video=document.getElementById('camera');
 video.srcObject=stream;
+
 await video.play();
 
-video.style.display='block';
-document.getElementById('placeholder').style.display='none';
+video.style.display="block";
+document.getElementById("placeholder").style.display="none";
 
-const status=document.getElementById('status');
-status.textContent='CÂMERA ATIVA';
-status.classList.add('on');
+document.getElementById("cameraStatus").textContent="CÂMERA ATIVA";
+document.getElementById("cameraStatus").classList.add("on");
 
-document.getElementById('startBtn').disabled=true;
-document.getElementById('stopBtn').disabled=false;
+document.getElementById("cameraInfo").innerHTML='<span class="ok">ATIVA</span>';
 
-result.innerHTML='<span class="ok">CÂMERA AUTORIZADA</span>';
-message.innerHTML='<strong>Sucesso.</strong> A câmera está funcionando fora do ambiente restrito do Apps Script.';
+document.getElementById("startBtn").disabled=true;
+document.getElementById("stopBtn").disabled=false;
+
+canvas.width=video.videoWidth;
+canvas.height=video.videoHeight;
+
+running=true;
+lastVideoTime=-1;
+
+requestAnimationFrame(predict);
 
 }catch(e){
+
 console.error(e);
-stream=null;
-result.innerHTML='<span class="error">'+e.name+': '+e.message+'</span>';
-message.innerHTML='<strong>Falha:</strong> '+e.name+' — '+e.message;
+
+document.getElementById("cameraInfo").innerHTML='<span class="error">'+e.name+'</span>';
+document.getElementById("message").innerHTML='<strong>Falha na câmera:</strong> '+e.message;
+
 }
+
+}
+
+async function predict(){
+
+if(!running||!poseLandmarker)return;
+
+if(video.currentTime!==lastVideoTime){
+
+lastVideoTime=video.currentTime;
+
+const result=poseLandmarker.detectForVideo(video,performance.now());
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+if(result.landmarks&&result.landmarks.length){
+
+const landmarks=result.landmarks[0];
+
+document.getElementById("bodyInfo").innerHTML='<span class="ok">DETECTADO</span>';
+document.getElementById("landmarkInfo").innerHTML='<span class="ok">'+landmarks.length+' / 33</span>';
+
+const poseStatus=document.getElementById("poseStatus");
+poseStatus.textContent="CORPO DETECTADO";
+poseStatus.classList.add("detected");
+
+drawPose(landmarks);
+
+}else{
+
+document.getElementById("bodyInfo").innerHTML='<span class="warn">NÃO DETECTADO</span>';
+document.getElementById("landmarkInfo").textContent="0 / 33";
+
+const poseStatus=document.getElementById("poseStatus");
+poseStatus.textContent="AGUARDANDO CORPO";
+poseStatus.classList.remove("detected");
+
+}
+
+frames++;
+
+const now=performance.now();
+
+if(now-fpsTime>=1000){
+
+document.getElementById("fpsInfo").textContent=frames+" FPS";
+
+frames=0;
+fpsTime=now;
+
+}
+
+}
+
+requestAnimationFrame(predict);
+
+}
+
+function drawPose(landmarks){
+
+ctx.lineWidth=4;
+ctx.strokeStyle="#49aaff";
+ctx.fillStyle="#7ee7ff";
+
+connections.forEach(pair=>{
+
+const a=landmarks[pair[0]];
+const b=landmarks[pair[1]];
+
+if(!a||!b)return;
+
+ctx.beginPath();
+ctx.moveTo(a.x*canvas.width,a.y*canvas.height);
+ctx.lineTo(b.x*canvas.width,b.y*canvas.height);
+ctx.stroke();
+
+});
+
+landmarks.forEach((p,i)=>{
+
+if(i>32)return;
+
+ctx.beginPath();
+ctx.arc(
+p.x*canvas.width,
+p.y*canvas.height,
+i===11||i===12||i===23||i===24||i===25||i===26||i===27||i===28?6:4,
+0,
+Math.PI*2
+);
+
+ctx.fill();
+
+});
+
 }
 
 function stopCamera(){
+
+running=false;
+
 if(stream){
+
 stream.getTracks().forEach(track=>track.stop());
 stream=null;
+
 }
 
-const video=document.getElementById('camera');
 video.srcObject=null;
-video.style.display='none';
+video.style.display="none";
 
-document.getElementById('placeholder').style.display='block';
+ctx.clearRect(0,0,canvas.width,canvas.height);
 
-const status=document.getElementById('status');
-status.textContent='CÂMERA DESLIGADA';
-status.classList.remove('on');
+document.getElementById("placeholder").style.display="flex";
 
-document.getElementById('startBtn').disabled=false;
-document.getElementById('stopBtn').disabled=true;
+document.getElementById("cameraStatus").textContent="CÂMERA DESLIGADA";
+document.getElementById("cameraStatus").classList.remove("on");
 
-document.getElementById('result').textContent='Câmera encerrada';
-document.getElementById('message').textContent='A câmera foi encerrada. Você pode iniciar um novo teste.';
+document.getElementById("poseStatus").textContent="AGUARDANDO CORPO";
+document.getElementById("poseStatus").classList.remove("detected");
+
+document.getElementById("cameraInfo").textContent="Aguardando";
+document.getElementById("bodyInfo").textContent="Não detectado";
+document.getElementById("landmarkInfo").textContent="0 / 33";
+document.getElementById("fpsInfo").textContent="—";
+
+document.getElementById("startBtn").disabled=false;
+document.getElementById("stopBtn").disabled=true;
+
 }
 
-diagnostics();
+window.startCamera=startCamera;
+window.stopCamera=stopCamera;
+
+initMediaPipe();
+
 </script>
 
 </body>
