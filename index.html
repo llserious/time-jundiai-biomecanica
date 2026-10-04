@@ -12,11 +12,12 @@ header{height:72px;background:#0b1d30;border-bottom:1px solid #18344f;display:fl
 main{max-width:1450px;margin:auto;padding:30px}.top{margin-bottom:22px}
 .tag{display:inline-block;background:#102b45;color:#73bdff;border:1px solid #214e72;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:11px}
 h1{font-size:30px;margin-bottom:7px}.subtitle{color:#91a4b8;font-size:15px}
-.grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(340px,1fr);gap:22px}
+.grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(350px,1fr);gap:22px}
 .card{background:#0c1928;border:1px solid #1a3045;border-radius:16px;padding:20px}
 .protocolBar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:16px;flex-wrap:wrap}
 .protocolTitle{font-weight:800;font-size:15px}.protocolCode{font-size:11px;color:#7790a6;margin-top:4px}
 .planes{display:flex;background:#07111d;padding:4px;border-radius:10px;border:1px solid #1b354d}
+button{border:0;border-radius:9px;padding:11px 17px;font-weight:700;cursor:pointer;font-size:14px}
 .plane{background:transparent;color:#8399ad;padding:9px 16px}.plane.active{background:#1677d2;color:#fff}
 .camera{position:relative;width:100%;aspect-ratio:16/9;background:#030a11;border-radius:12px;overflow:hidden}
 video{position:absolute;width:100%;height:100%;object-fit:cover;display:none}
@@ -28,23 +29,33 @@ canvas{position:absolute;width:100%;height:100%;left:0;top:0;pointer-events:none
 .poseStatus{right:14px;background:#382515;border:1px solid #75502a;color:#ffc47c}.poseStatus.detected{background:#103b28;border-color:#1d754b;color:#72e5a6}
 .positionStatus{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:6;background:#3c2515;color:#ffc47c;border:1px solid #80572d;padding:9px 15px;border-radius:20px;font-size:12px;font-weight:800;white-space:nowrap}
 .positionStatus.valid{background:#103b28;color:#6fe7a5;border-color:#237a50}
-.controls{display:flex;gap:10px;margin-top:15px}
-button{border:0;border-radius:9px;padding:11px 17px;font-weight:700;cursor:pointer;font-size:14px}
+.controls{display:flex;gap:10px;margin-top:15px;flex-wrap:wrap}
 .primary{background:#1677d2;color:#fff}.secondary{background:#17283a;color:#d7e5f2;border:1px solid #29445e}
+.capture{background:#17854d;color:#fff}.capture.active{background:#b53838}
 button:disabled{opacity:.45;cursor:not-allowed}
-.sideTitle{font-size:17px;font-weight:800;margin-bottom:16px}
-.qualityBox{background:#101f2e;border:1px solid #203b55;border-radius:12px;padding:14px;margin-bottom:15px}
-.qualityTop{display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;font-weight:700}
+.sideTitle{font-size:17px;font-weight:800;margin-bottom:14px}
+.stateBox{background:#07111d;border:1px solid #203b55;border-radius:13px;padding:16px;text-align:center;margin-bottom:14px}
+.stateLabel{font-size:10px;color:#71869a;font-weight:800;text-transform:uppercase;margin-bottom:6px}
+.stateValue{font-size:23px;font-weight:900;color:#73bdff}
+.repCounter{text-align:center;background:#102236;border:1px solid #244765;border-radius:13px;padding:15px;margin-bottom:14px}
+.repNumber{font-size:31px;font-weight:900}.repLabel{font-size:11px;color:#8095a9;margin-top:3px}
+.repDots{display:flex;justify-content:center;gap:10px;margin-top:11px}
+.repDot{width:16px;height:16px;border-radius:50%;background:#203347;border:2px solid #39536c}
+.repDot.done{background:#54d796;border-color:#54d796}
+.qualityBox{background:#101f2e;border:1px solid #203b55;border-radius:12px;padding:13px;margin-bottom:14px}
+.qualityTop{display:flex;justify-content:space-between;margin-bottom:8px;font-size:12px;font-weight:700}
 .qualityBar{height:7px;background:#1b2b3b;border-radius:10px;overflow:hidden}.qualityFill{height:100%;width:0;background:#54d796;transition:.15s}
-.qualityMessage{font-size:12px;color:#8fa5b9;margin-top:9px;line-height:1.4}
-.metrics{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.metric{background:#101f2e;border:1px solid #20384e;border-radius:12px;padding:13px}
-.metricLabel{font-size:10px;color:#7f95a9;text-transform:uppercase;font-weight:800;margin-bottom:6px}
-.metricValue{font-size:25px;font-weight:800}.metricSub{font-size:10px;color:#72879a;margin-top:4px}
-.protocolInfo{margin-top:14px;padding:12px;background:#0a1623;border-radius:10px;border:1px solid #172e43}
-.infoRow{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #182b3d;font-size:12px}.infoRow:last-child{border:0}
-.infoLabel{color:#71869a}.ok{color:#61dc9b}.warn{color:#ffc46b}.error{color:#ff7777}
-.message{margin-top:15px;padding:12px;border-radius:9px;background:#101f2e;color:#91a4b8;font-size:13px;line-height:1.5}
+.qualityMessage{font-size:11px;color:#8fa5b9;margin-top:8px;line-height:1.4}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.metric{background:#101f2e;border:1px solid #20384e;border-radius:11px;padding:11px}
+.metricLabel{font-size:9px;color:#7f95a9;text-transform:uppercase;font-weight:800;margin-bottom:5px}
+.metricValue{font-size:22px;font-weight:800}.metricSub{font-size:9px;color:#72879a;margin-top:3px}
+.lastRep{margin-top:14px;background:#0a1623;border:1px solid #1b344a;border-radius:11px;padding:13px}
+.lastRepTitle{font-size:11px;color:#78a7ce;text-transform:uppercase;font-weight:800;margin-bottom:9px}
+.lastGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.lastItem{font-size:11px;color:#8296a9}.lastItem strong{display:block;color:#fff;font-size:14px;margin-top:2px}
+.message{margin-top:14px;padding:12px;border-radius:9px;background:#101f2e;color:#91a4b8;font-size:12px;line-height:1.5}
+.ok{color:#61dc9b}.warn{color:#ffc46b}.error{color:#ff7777}
 @media(max-width:850px){main{padding:16px}.grid{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}header{padding:0 18px}.positionStatus{font-size:10px}}
 </style>
 </head>
@@ -55,9 +66,9 @@ button:disabled{opacity:.45;cursor:not-allowed}
 <main>
 
 <div class="top">
-<div class="tag">MOTOR BIOMECÂNICO • MVP 0.4</div>
-<h1>Protocolo de captura</h1>
-<div class="subtitle">TJP-SQUAT-01 • Agachamento Bilateral • Preparação para captura padronizada.</div>
+<div class="tag">MOTOR BIOMECÂNICO • MVP 0.5</div>
+<h1>Captura automática do agachamento</h1>
+<div class="subtitle">TJP-SQUAT-01 • Detecção das fases do movimento e registro automático de 3 repetições.</div>
 </div>
 
 <div class="grid">
@@ -94,6 +105,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
 <div class="controls">
 <button class="primary" id="startBtn" onclick="startCamera()" disabled>Iniciar câmera</button>
 <button class="secondary" id="stopBtn" onclick="stopCamera()" disabled>Parar câmera</button>
+<button class="capture" id="captureBtn" onclick="toggleCapture()" disabled>Iniciar 3 repetições</button>
 </div>
 
 <div class="message" id="message">Carregando motor biomecânico...</div>
@@ -102,7 +114,22 @@ button:disabled{opacity:.45;cursor:not-allowed}
 
 <div class="card">
 
-<div class="sideTitle">Validação do posicionamento</div>
+<div class="sideTitle">Captura biomecânica</div>
+
+<div class="stateBox">
+<div class="stateLabel">Fase atual</div>
+<div class="stateValue" id="movementState">PREPARAÇÃO</div>
+</div>
+
+<div class="repCounter">
+<div class="repNumber"><span id="repCount">0</span> / 3</div>
+<div class="repLabel">REPETIÇÕES VÁLIDAS</div>
+<div class="repDots">
+<div class="repDot" id="repDot1"></div>
+<div class="repDot" id="repDot2"></div>
+<div class="repDot" id="repDot3"></div>
+</div>
+</div>
 
 <div class="qualityBox">
 <div class="qualityTop"><span>Qualidade técnica</span><span id="qualityValue">0%</span></div>
@@ -113,13 +140,13 @@ button:disabled{opacity:.45;cursor:not-allowed}
 <div class="metrics">
 
 <div class="metric">
-<div class="metricLabel">Joelho esquerdo</div>
+<div class="metricLabel">Joelho E</div>
 <div class="metricValue" id="kneeLeft">—°</div>
 <div class="metricSub">ângulo interno 2D</div>
 </div>
 
 <div class="metric">
-<div class="metricLabel">Joelho direito</div>
+<div class="metricLabel">Joelho D</div>
 <div class="metricValue" id="kneeRight">—°</div>
 <div class="metricSub">ângulo interno 2D</div>
 </div>
@@ -133,18 +160,19 @@ button:disabled{opacity:.45;cursor:not-allowed}
 <div class="metric">
 <div class="metricLabel">Tronco</div>
 <div class="metricValue" id="trunkAngle">—°</div>
-<div class="metricSub">inclinação vertical 2D</div>
+<div class="metricSub">inclinação 2D</div>
 </div>
 
 </div>
 
-<div class="protocolInfo">
-<div class="infoRow"><span class="infoLabel">Plano</span><strong id="planeInfo">FRONTAL</strong></div>
-<div class="infoRow"><span class="infoLabel">Corpo</span><strong id="bodyInfo">Não detectado</strong></div>
-<div class="infoRow"><span class="infoLabel">Landmarks</span><strong id="landmarkInfo">0 / 33</strong></div>
-<div class="infoRow"><span class="infoLabel">Estabilidade</span><strong id="stabilityInfo">Aguardando</strong></div>
-<div class="infoRow"><span class="infoLabel">FPS</span><strong id="fpsInfo">—</strong></div>
-<div class="infoRow"><span class="infoLabel">Motor</span><strong id="engine">Carregando...</strong></div>
+<div class="lastRep">
+<div class="lastRepTitle">Última repetição</div>
+<div class="lastGrid">
+<div class="lastItem">Descida<strong id="lastDescent">—</strong></div>
+<div class="lastItem">Subida<strong id="lastAscent">—</strong></div>
+<div class="lastItem">Joelho mín.<strong id="lastKnee">—</strong></div>
+<div class="lastItem">Quadril mín.<strong id="lastHip">—</strong></div>
+</div>
 </div>
 
 </div>
@@ -164,26 +192,35 @@ let lastVideoTime=-1;
 let frames=0;
 let fpsTime=performance.now();
 let stableFrames=0;
+let positionValid=false;
 
-const smooth={
-kneeLeft:null,
-kneeRight:null,
-hip:null,
-trunk:null
-};
+let captureActive=false;
+let movementState="STANDING";
+let repCount=0;
+let previousKnee=null;
+let stateFrames=0;
 
+let repData=null;
+let completedReps=[];
+
+const smooth={kneeLeft:null,kneeRight:null,hip:null,trunk:null};
 const SMOOTH_ALPHA=.22;
 
 const video=document.getElementById("camera");
 const canvas=document.getElementById("overlay");
 const ctx=canvas.getContext("2d");
 
-const connections=[
-[11,12],[11,13],[13,15],[12,14],[14,16],
-[11,23],[12,24],[23,24],
-[23,25],[25,27],[27,29],[29,31],
-[24,26],[26,28],[28,30],[30,32]
-];
+const connections=[[11,12],[11,13],[13,15],[12,14],[14,16],[11,23],[12,24],[23,24],[23,25],[25,27],[27,29],[29,31],[24,26],[26,28],[28,30],[30,32]];
+
+const THRESHOLDS={
+standing:160,
+descent:150,
+bottom:115,
+rise:135,
+finish:158,
+directionDelta:.7,
+stateFrames:3
+};
 
 async function initMediaPipe(){
 try{
@@ -201,29 +238,28 @@ minPosePresenceConfidence:.55,
 minTrackingConfidence:.55
 });
 
-document.getElementById("engine").innerHTML='<span class="ok">ATIVO</span>';
-document.getElementById("message").innerHTML='<strong>Motor pronto.</strong> Selecione o plano, inicie a câmera e enquadre o corpo inteiro.';
+document.getElementById("engine");
+document.getElementById("message").innerHTML="<strong>Motor pronto.</strong> Valide o posicionamento e depois inicie as 3 repetições.";
 document.getElementById("startBtn").disabled=false;
 
 }catch(e){
 console.error(e);
-document.getElementById("engine").innerHTML='<span class="error">ERRO</span>';
-document.getElementById("message").textContent=e.message;
+document.getElementById("message").textContent="Erro MediaPipe: "+e.message;
 }
 }
 
 function setPlane(value){
+if(captureActive)return;
+
 plane=value;
 
 document.getElementById("frontalBtn").classList.toggle("active",value==="frontal");
 document.getElementById("lateralBtn").classList.toggle("active",value==="lateral");
-document.getElementById("planeInfo").textContent=value.toUpperCase();
 
 stableFrames=0;
+positionValid=false;
 resetSmoothing();
-
-document.getElementById("positionStatus").textContent="POSICIONAMENTO NÃO VALIDADO";
-document.getElementById("positionStatus").classList.remove("valid");
+resetCapture();
 
 document.getElementById("qualityMessage").textContent=
 value==="frontal"
@@ -257,12 +293,11 @@ canvas.height=video.videoHeight;
 
 running=true;
 lastVideoTime=-1;
-stableFrames=0;
 
 requestAnimationFrame(predict);
 
 }catch(e){
-document.getElementById("message").innerHTML='<strong>Falha na câmera:</strong> '+e.name+' — '+e.message;
+document.getElementById("message").innerHTML="<strong>Falha na câmera:</strong> "+e.name+" — "+e.message;
 }
 }
 
@@ -280,9 +315,7 @@ const mag2=Math.hypot(cbx,cby);
 
 if(!mag1||!mag2)return null;
 
-const cosine=Math.max(-1,Math.min(1,dot/(mag1*mag2)));
-
-return Math.acos(cosine)*180/Math.PI;
+return Math.acos(Math.max(-1,Math.min(1,dot/(mag1*mag2))))*180/Math.PI;
 }
 
 function trunkInclination(ls,rs,lh,rh){
@@ -308,10 +341,7 @@ return smooth[key];
 }
 
 function resetSmoothing(){
-smooth.kneeLeft=null;
-smooth.kneeRight=null;
-smooth.hip=null;
-smooth.trunk=null;
+Object.keys(smooth).forEach(k=>smooth[k]=null);
 }
 
 function visibility(p){
@@ -327,26 +357,26 @@ const rawLeftHip=angle3(lm[11],lm[23],lm[25]);
 const rawRightHip=angle3(lm[12],lm[24],lm[26]);
 
 const rawHip=(rawLeftHip+rawRightHip)/2;
-
 const rawTrunk=trunkInclination(lm[11],lm[12],lm[23],lm[24]);
 
-const leftKnee=smoothing("kneeLeft",rawLeftKnee);
-const rightKnee=smoothing("kneeRight",rawRightKnee);
-const hip=smoothing("hip",rawHip);
-const trunk=smoothing("trunk",rawTrunk);
+const metrics={
+kneeLeft:smoothing("kneeLeft",rawLeftKnee),
+kneeRight:smoothing("kneeRight",rawRightKnee),
+hip:smoothing("hip",rawHip),
+trunk:smoothing("trunk",rawTrunk)
+};
 
-setAngle("kneeLeft",leftKnee);
-setAngle("kneeRight",rightKnee);
-setAngle("hipAngle",hip);
-setAngle("trunkAngle",trunk);
+setAngle("kneeLeft",metrics.kneeLeft);
+setAngle("kneeRight",metrics.kneeRight);
+setAngle("hipAngle",metrics.hip);
+setAngle("trunkAngle",metrics.trunk);
 
+return metrics;
 }
 
 function setAngle(id,value){
 document.getElementById(id).textContent=
-value!==null&&Number.isFinite(value)
-?Math.round(value)+"°"
-:"—°";
+Number.isFinite(value)?Math.round(value)+"°":"—°";
 }
 
 function evaluatePosition(lm){
@@ -361,113 +391,321 @@ const p=lm[i];
 
 if(visibility(p)>=.60)visible++;
 
-if(
-p &&
-p.x>.04 &&
-p.x<.96 &&
-p.y>.04 &&
-p.y<.96
-)inside++;
+if(p&&p.x>.04&&p.x<.96&&p.y>.04&&p.y<.96)inside++;
 });
 
 const visibilityScore=visible/required.length;
 const insideScore=inside/required.length;
 
-let orientationScore=1;
+const shoulderWidth=Math.abs(lm[11].x-lm[12].x);
+const hipWidth=Math.abs(lm[23].x-lm[24].x);
+
+let orientationScore;
 
 if(plane==="frontal"){
-
-const shoulderWidth=Math.abs(lm[11].x-lm[12].x);
-const hipWidth=Math.abs(lm[23].x-lm[24].x);
-
-orientationScore=
-shoulderWidth>.07&&hipWidth>.045
-?1
-:.45;
-
+orientationScore=shoulderWidth>.07&&hipWidth>.045?1:.45;
 }else{
-
-const shoulderWidth=Math.abs(lm[11].x-lm[12].x);
-const hipWidth=Math.abs(lm[23].x-lm[24].x);
-
-orientationScore=
-shoulderWidth<.16&&hipWidth<.13
-?1
-:.55;
+orientationScore=shoulderWidth<.16&&hipWidth<.13?1:.55;
 }
 
-const score=Math.round(
-(
-visibilityScore*.45+
-insideScore*.40+
-orientationScore*.15
-)*100
-);
+const score=Math.round((visibilityScore*.45+insideScore*.40+orientationScore*.15)*100);
 
 document.getElementById("qualityValue").textContent=score+"%";
 document.getElementById("qualityFill").style.width=score+"%";
 
-let valid=
-score>=88 &&
-visible===required.length &&
-inside===required.length;
+const valid=score>=88&&visible===required.length&&inside===required.length;
 
-if(valid){
-stableFrames++;
-}else{
-stableFrames=0;
-}
+if(valid)stableFrames++;
+else stableFrames=0;
 
-const stable=stableFrames>=15;
-
-document.getElementById("stabilityInfo").innerHTML=
-stable
-?'<span class="ok">ESTÁVEL</span>'
-:valid
-?'<span class="warn">ESTABILIZANDO...</span>'
-:'<span class="warn">AJUSTAR</span>';
+positionValid=stableFrames>=15;
 
 const status=document.getElementById("positionStatus");
 
-if(stable){
+if(positionValid){
 
 status.textContent="POSICIONAMENTO VÁLIDO";
 status.classList.add("valid");
 
-document.getElementById("qualityMessage").textContent=
-"Posicionamento adequado e estável para iniciar a captura.";
+if(!captureActive)
+document.getElementById("qualityMessage").textContent="Posicionamento estável. Captura liberada.";
+
+document.getElementById("captureBtn").disabled=false;
 
 }else{
 
 status.textContent="POSICIONAMENTO NÃO VALIDADO";
 status.classList.remove("valid");
 
-if(inside<required.length){
+if(!captureActive)document.getElementById("captureBtn").disabled=true;
 
-document.getElementById("qualityMessage").textContent=
-"Afaste-se da câmera: ombros, quadris, joelhos, tornozelos e pés precisam permanecer dentro da imagem.";
+if(inside<required.length)
+document.getElementById("qualityMessage").textContent="Afaste-se: mantenha o corpo inteiro e os pés dentro da imagem.";
+else if(visible<required.length)
+document.getElementById("qualityMessage").textContent="Algumas articulações apresentam baixa confiança.";
+else if(orientationScore<1)
+document.getElementById("qualityMessage").textContent=plane==="frontal"?"Posicione-se de frente para a câmera.":"Posicione-se de perfil para a câmera.";
+else
+document.getElementById("qualityMessage").textContent="Mantenha a posição para estabilizar.";
 
-}else if(visible<required.length){
+}
 
-document.getElementById("qualityMessage").textContent=
-"Algumas articulações apresentam baixa confiança de detecção.";
+return positionValid;
+}
 
-}else if(orientationScore<1){
+function toggleCapture(){
 
-document.getElementById("qualityMessage").textContent=
-plane==="frontal"
-?"Ajuste o atleta para ficar de frente para a câmera."
-:"Ajuste o atleta para ficar de perfil para a câmera.";
+if(captureActive){
+stopCapture();
+return;
+}
+
+if(!positionValid){
+document.getElementById("message").textContent="Valide o posicionamento antes de iniciar.";
+return;
+}
+
+captureActive=true;
+repCount=0;
+completedReps=[];
+movementState="STANDING";
+stateFrames=0;
+previousKnee=null;
+repData=null;
+
+updateRepUI();
+
+document.getElementById("captureBtn").textContent="Cancelar captura";
+document.getElementById("captureBtn").classList.add("active");
+
+document.getElementById("frontalBtn").disabled=true;
+document.getElementById("lateralBtn").disabled=true;
+
+setState("EM PÉ");
+
+document.getElementById("message").innerHTML="<strong>Captura iniciada.</strong> Realize 3 agachamentos completos em ritmo natural.";
+
+}
+
+function stopCapture(){
+
+captureActive=false;
+repData=null;
+movementState="STANDING";
+stateFrames=0;
+previousKnee=null;
+
+document.getElementById("captureBtn").textContent="Iniciar 3 repetições";
+document.getElementById("captureBtn").classList.remove("active");
+
+document.getElementById("frontalBtn").disabled=false;
+document.getElementById("lateralBtn").disabled=false;
+
+setState("PREPARAÇÃO");
+
+}
+
+function processMovement(metrics){
+
+if(!captureActive||!positionValid)return;
+
+const knee=(metrics.kneeLeft+metrics.kneeRight)/2;
+
+if(!Number.isFinite(knee))return;
+
+const now=performance.now();
+
+const delta=previousKnee===null?0:knee-previousKnee;
+
+previousKnee=knee;
+
+switch(movementState){
+
+case "STANDING":
+
+if(knee<THRESHOLDS.descent&&delta<-THRESHOLDS.directionDelta){
+
+stateFrames++;
+
+if(stateFrames>=THRESHOLDS.stateFrames){
+
+movementState="DESCENT";
+
+repData={
+start:now,
+bottom:null,
+minKnee:knee,
+minHip:metrics.hip,
+maxTrunk:metrics.trunk
+};
+
+stateFrames=0;
+setState("DESCIDA");
+
+}
+
+}else{
+stateFrames=0;
+}
+
+break;
+
+case "DESCENT":
+
+updateRepExtremes(metrics,knee);
+
+if(knee<=THRESHOLDS.bottom){
+
+stateFrames++;
+
+if(stateFrames>=THRESHOLDS.stateFrames){
+
+movementState="BOTTOM";
+repData.bottom=now;
+stateFrames=0;
+setState("FUNDO");
+
+}
+
+}else{
+stateFrames=0;
+}
+
+break;
+
+case "BOTTOM":
+
+updateRepExtremes(metrics,knee);
+
+if(delta>THRESHOLDS.directionDelta&&knee>THRESHOLDS.bottom){
+
+stateFrames++;
+
+if(stateFrames>=THRESHOLDS.stateFrames){
+
+movementState="ASCENT";
+stateFrames=0;
+setState("SUBIDA");
+
+}
+
+}else{
+stateFrames=0;
+}
+
+break;
+
+case "ASCENT":
+
+updateRepExtremes(metrics,knee);
+
+if(knee>=THRESHOLDS.finish){
+
+stateFrames++;
+
+if(stateFrames>=THRESHOLDS.stateFrames){
+
+completeRep(now);
+
+stateFrames=0;
+
+}
+
+}else{
+stateFrames=0;
+}
+
+break;
+
+}
+
+}
+
+function updateRepExtremes(metrics,knee){
+
+if(!repData)return;
+
+repData.minKnee=Math.min(repData.minKnee,knee);
+
+if(Number.isFinite(metrics.hip))
+repData.minHip=Math.min(repData.minHip,metrics.hip);
+
+if(Number.isFinite(metrics.trunk))
+repData.maxTrunk=Math.max(repData.maxTrunk,metrics.trunk);
+
+}
+
+function completeRep(endTime){
+
+if(!repData||!repData.bottom)return;
+
+const rep={
+number:repCount+1,
+descent:(repData.bottom-repData.start)/1000,
+ascent:(endTime-repData.bottom)/1000,
+minKnee:repData.minKnee,
+minHip:repData.minHip,
+maxTrunk:repData.maxTrunk
+};
+
+completedReps.push(rep);
+
+repCount++;
+
+showLastRep(rep);
+updateRepUI();
+
+repData=null;
+
+if(repCount>=3){
+
+captureActive=false;
+
+setState("CONCLUÍDO");
+
+document.getElementById("captureBtn").textContent="Captura concluída";
+document.getElementById("captureBtn").classList.remove("active");
+document.getElementById("captureBtn").disabled=true;
+
+document.getElementById("frontalBtn").disabled=false;
+document.getElementById("lateralBtn").disabled=false;
+
+document.getElementById("message").innerHTML="<strong>3 repetições concluídas.</strong> Captura finalizada com sucesso.";
 
 }else{
 
-document.getElementById("qualityMessage").textContent=
-"Mantenha a posição por alguns instantes para validar.";
+movementState="STANDING";
+setState("REP "+repCount+" CONCLUÍDA");
+
+setTimeout(()=>{
+if(captureActive&&movementState==="STANDING")setState("EM PÉ");
+},700);
 
 }
+
 }
 
-return stable;
+function showLastRep(rep){
+
+document.getElementById("lastDescent").textContent=rep.descent.toFixed(2)+" s";
+document.getElementById("lastAscent").textContent=rep.ascent.toFixed(2)+" s";
+document.getElementById("lastKnee").textContent=Math.round(rep.minKnee)+"°";
+document.getElementById("lastHip").textContent=Math.round(rep.minHip)+"°";
+
+}
+
+function updateRepUI(){
+
+document.getElementById("repCount").textContent=repCount;
+
+for(let i=1;i<=3;i++){
+document.getElementById("repDot"+i).classList.toggle("done",i<=repCount);
+}
+
+}
+
+function setState(value){
+document.getElementById("movementState").textContent=value;
 }
 
 async function predict(){
@@ -478,10 +716,7 @@ if(video.currentTime!==lastVideoTime){
 
 lastVideoTime=video.currentTime;
 
-const result=poseLandmarker.detectForVideo(
-video,
-performance.now()
-);
+const result=poseLandmarker.detectForVideo(video,performance.now());
 
 ctx.clearRect(0,0,canvas.width,canvas.height);
 
@@ -489,29 +724,33 @@ if(result.landmarks&&result.landmarks.length){
 
 const lm=result.landmarks[0];
 
-document.getElementById("bodyInfo").innerHTML='<span class="ok">DETECTADO</span>';
-document.getElementById("landmarkInfo").innerHTML='<span class="ok">33 / 33</span>';
+document.getElementById("bodyInfo");
 
 const poseStatus=document.getElementById("poseStatus");
-
 poseStatus.textContent="CORPO DETECTADO";
 poseStatus.classList.add("detected");
 
 drawPose(lm);
-calculateMetrics(lm);
+
+const metrics=calculateMetrics(lm);
+
 evaluatePosition(lm);
+
+processMovement(metrics);
 
 }else{
 
-resetAnalysis();
-
-document.getElementById("bodyInfo").innerHTML='<span class="warn">NÃO DETECTADO</span>';
-document.getElementById("landmarkInfo").textContent="0 / 33";
+stableFrames=0;
+positionValid=false;
 
 const poseStatus=document.getElementById("poseStatus");
-
 poseStatus.textContent="AGUARDANDO CORPO";
 poseStatus.classList.remove("detected");
+
+document.getElementById("positionStatus").textContent="POSICIONAMENTO NÃO VALIDADO";
+document.getElementById("positionStatus").classList.remove("valid");
+
+if(!captureActive)document.getElementById("captureBtn").disabled=true;
 
 }
 
@@ -520,17 +759,14 @@ frames++;
 const now=performance.now();
 
 if(now-fpsTime>=1000){
-
-document.getElementById("fpsInfo").textContent=frames+" FPS";
-
 frames=0;
 fpsTime=now;
-
 }
 
 }
 
 requestAnimationFrame(predict);
+
 }
 
 function drawPose(lm){
@@ -547,17 +783,8 @@ const b=lm[j];
 if(!a||!b)return;
 
 ctx.beginPath();
-
-ctx.moveTo(
-a.x*canvas.width,
-a.y*canvas.height
-);
-
-ctx.lineTo(
-b.x*canvas.width,
-b.y*canvas.height
-);
-
+ctx.moveTo(a.x*canvas.width,a.y*canvas.height);
+ctx.lineTo(b.x*canvas.width,b.y*canvas.height);
 ctx.stroke();
 
 });
@@ -565,40 +792,34 @@ ctx.stroke();
 lm.forEach(p=>{
 
 ctx.beginPath();
-
-ctx.arc(
-p.x*canvas.width,
-p.y*canvas.height,
-4,
-0,
-Math.PI*2
-);
-
+ctx.arc(p.x*canvas.width,p.y*canvas.height,4,0,Math.PI*2);
 ctx.fill();
 
 });
 
 }
 
-function resetAnalysis(){
+function resetCapture(){
 
-stableFrames=0;
+captureActive=false;
+repCount=0;
+completedReps=[];
+repData=null;
+movementState="STANDING";
+previousKnee=null;
+stateFrames=0;
 
-resetSmoothing();
+updateRepUI();
 
-["kneeLeft","kneeRight","hipAngle","trunkAngle"].forEach(
-id=>document.getElementById(id).textContent="—°"
-);
+setState("PREPARAÇÃO");
 
-document.getElementById("qualityValue").textContent="0%";
-document.getElementById("qualityFill").style.width="0";
-document.getElementById("qualityMessage").textContent="Corpo não detectado.";
-document.getElementById("stabilityInfo").textContent="Aguardando";
+document.getElementById("lastDescent").textContent="—";
+document.getElementById("lastAscent").textContent="—";
+document.getElementById("lastKnee").textContent="—";
+document.getElementById("lastHip").textContent="—";
 
-const status=document.getElementById("positionStatus");
-
-status.textContent="POSICIONAMENTO NÃO VALIDADO";
-status.classList.remove("valid");
+document.getElementById("captureBtn").textContent="Iniciar 3 repetições";
+document.getElementById("captureBtn").classList.remove("active");
 
 }
 
@@ -606,25 +827,17 @@ function stopCamera(){
 
 running=false;
 
+stopCapture();
+
 if(stream){
-
-stream.getTracks().forEach(
-track=>track.stop()
-);
-
+stream.getTracks().forEach(track=>track.stop());
 stream=null;
-
 }
 
 video.srcObject=null;
 video.style.display="none";
 
-ctx.clearRect(
-0,
-0,
-canvas.width,
-canvas.height
-);
+ctx.clearRect(0,0,canvas.width,canvas.height);
 
 document.getElementById("placeholder").style.display="flex";
 
@@ -634,24 +847,27 @@ document.getElementById("cameraStatus").classList.remove("on");
 document.getElementById("poseStatus").textContent="AGUARDANDO CORPO";
 document.getElementById("poseStatus").classList.remove("detected");
 
-document.getElementById("bodyInfo").textContent="Não detectado";
-document.getElementById("landmarkInfo").textContent="0 / 33";
-document.getElementById("fpsInfo").textContent="—";
+document.getElementById("positionStatus").textContent="POSICIONAMENTO NÃO VALIDADO";
+document.getElementById("positionStatus").classList.remove("valid");
 
-resetAnalysis();
-
+document.getElementById("captureBtn").disabled=true;
 document.getElementById("startBtn").disabled=false;
 document.getElementById("stopBtn").disabled=true;
+
+stableFrames=0;
+positionValid=false;
+
+resetSmoothing();
 
 }
 
 window.startCamera=startCamera;
 window.stopCamera=stopCamera;
 window.setPlane=setPlane;
+window.toggleCapture=toggleCapture;
 
 initMediaPipe();
 
 </script>
-
 </body>
 </html>
