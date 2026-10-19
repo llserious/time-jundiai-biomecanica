@@ -331,7 +331,8 @@ function validateResultPackage(pkg){if(!SESSION.valid)throw new Error("Sessão b
 
 function finalizeResultPackage(){RESULT_PACKAGE=buildResultPackage();validateResultPackage(RESULT_PACKAGE);console.log("TJP_RESULT_PACKAGE_READY",RESULT_PACKAGE);sendResultToMainApp(RESULT_PACKAGE);return RESULT_PACKAGE;}
 
-function sendResultToMainApp(pkg){if(!SESSION.valid)throw new Error("Sessão biomecânica inválida para envio.");if(!window.opener||window.opener.closed)throw new Error("A aba principal do TIME JUNDIAÍ PERFORMANCE não está disponível. Mantenha a aba que abriu o motor aberta.");window.opener.postMessage({type:"TJP_BIOMECHANICS_RESULT",token:SESSION.token,payload:pkg},"*");document.getElementById("message").innerHTML="<strong>AVALIAÇÃO CONCLUÍDA.</strong> Resultado enviado ao TIME JUNDIAÍ PERFORMANCE.";}
+
+function sendResultToMainApp(pkg){if(!SESSION.valid)throw new Error("Sessão biomecânica inválida para envio.");if(!window.opener||window.opener.closed)throw new Error("A aba principal do TIME JUNDIAÍ PERFORMANCE não está disponível. Mantenha a aba que abriu o motor aberta.");window.opener.postMessage({type:"TJP_BIOMECHANICS_RESULT",token:SESSION.token,payload:pkg},window.location.origin==="https://llserious.github.io"?"*":"*");document.getElementById("message").innerHTML="<strong>CAPTURA FINALIZADA.</strong> Resultado enviado para processamento. Volte à aba principal do TIME JUNDIAÍ PERFORMANCE e aguarde a confirmação de gravação na planilha.";document.getElementById("completeBadge").textContent="CAPTURA FINALIZADA • AGUARDANDO GRAVAÇÃO";}
 
 window.startCamera=startCamera;
 window.stopCamera=stopCamera;
