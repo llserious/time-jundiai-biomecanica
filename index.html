@@ -257,6 +257,12 @@ const connections=[[11,12],[11,13],[13,15],[12,14],[14,16],[11,23],[12,24],[23,2
 const THRESHOLDS={descent:150,bottom:115,finish:158,directionDelta:.7,stateFrames:3};
 const STS_THRESHOLDS={seatedMax:125,standingMin:158,directionDelta:.55,stateFrames:3,duration:30};
 
+const CMJ_CONFIG={protocol:"TJP-CMJ-01",version:"1.0",trials:3,restSeconds:60,primaryPlane:"lateral",secondaryPlane:"frontal",gravity:9.81,experimental:true};
+function isCMJ(){return SESSION.protocolo==="TJP-CMJ-01";}
+
+function cmjReadPose(lm){if(!lm||lm.length<33)return null;const ids=[11,12,23,24,25,26,27,28,29,30,31,32];if(ids.some(i=>!lm[i]||!Number.isFinite(lm[i].x)||!Number.isFinite(lm[i].y)))return null;const avg=(a,b,k)=>(lm[a][k]+lm[b][k])/2,hipY=avg(23,24,'y'),shoulderY=avg(11,12,'y'),ankleY=avg(27,28,'y'),footY=Math.max(lm[29].y,lm[30].y,lm[31].y,lm[32].y),kneeLeft=angle3(lm[23],lm[25],lm[27]),kneeRight=angle3(lm[24],lm[26],lm[28]),hipLeft=angle3(lm[11],lm[23],lm[25]),hipRight=angle3(lm[12],lm[24],lm[26]);return{time:performance.now(),hipY,shoulderY,ankleY,footY,kneeAngle:(kneeLeft+kneeRight)/2,hipAngle:(hipLeft+hipRight)/2,bodySize:Math.abs(footY-shoulderY),quality:ids.reduce((s,i)=>s+(lm[i].visibility||0),0)/ids.length};}
+  
+
 function isSTS(){return SESSION.protocolo==="TJP-STS-01";}
 
 function loadSession(){const p=new URLSearchParams(location.search);SESSION.atleta=p.get("atleta")||"";SESSION.avaliacao=p.get("avaliacao")||"";SESSION.teste=p.get("teste")||"";SESSION.protocolo=p.get("protocolo")||"TJP-SQUAT-01";SESSION.token=p.get("token")||"";SESSION.valid=!!(SESSION.atleta&&SESSION.avaliacao&&SESSION.teste&&SESSION.token);document.getElementById("sessionAthlete").textContent="ATLETA: "+(SESSION.atleta||"—");document.getElementById("sessionAssessment").textContent="AVALIAÇÃO: "+(SESSION.avaliacao||"—");document.getElementById("sessionTest").textContent="TESTE: "+(SESSION.teste||"—");if(!SESSION.valid)throw new Error("Sessão biomecânica incompleta. Abra o Motor Biomecânico pelo TIME JUNDIAÍ PERFORMANCE.");}
