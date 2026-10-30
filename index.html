@@ -62,6 +62,60 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .resultMetrics{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:13px}.resultMetric{background:#07111d;border:1px solid #1b344a;border-radius:9px;padding:9px}.resultMetric span{display:block;color:#71869a;font-size:9px;text-transform:uppercase;margin-bottom:4px}.resultMetric strong{font-size:15px}
 .repTable{width:100%;border-collapse:collapse;margin-top:13px;font-size:10px}.repTable th,.repTable td{text-align:left;padding:7px 4px;border-bottom:1px solid #172c40}.repTable th{color:#71869a}.repTable td{color:#d8e5ef}
 @media(max-width:850px){main{padding:16px}.grid,.resultGrid{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}header{padding:0 18px}.positionStatus{font-size:10px}.session{display:none}}
+
+/* TIME JUNDIAÍ PERFORMANCE — MOTOR BIOMECÂNICO NEON V1 */
+:root{--tj-black:#05060d;--tj-panel:#0a1228;--tj-blue:#008cff;--tj-cyan:#00d9ff;--tj-purple:#a435ff;--tj-green:#00e599;--tj-text:#eff6ff;--tj-muted:#a6b9dc}
+body{background:radial-gradient(ellipse at 50% -15%,#101c43 0%,#05060d 58%)!important;color:var(--tj-text)!important}
+header{background:linear-gradient(90deg,#060b1c,#0b1432)!important;border-bottom:1px solid #2865db!important;box-shadow:0 0 22px rgba(0,130,255,.19)!important}
+.brand{color:#fff!important;text-shadow:0 0 12px rgba(90,170,255,.23)}
+.brand span{background:linear-gradient(90deg,#00d9ff,#b35aff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+main{max-width:1600px!important}
+.tag{background:rgba(15,42,89,.85)!important;border:1px solid #3476ed!important;color:#77d8ff!important;box-shadow:0 0 12px rgba(0,140,255,.2)!important}
+h1{color:#f5f8ff!important;text-shadow:0 0 16px rgba(120,80,255,.18)}
+.subtitle,.protocolCode,.qualityMessage,.metricSub,.repLabel{color:#afbfdb!important}
+.session span{background:#101e3b!important;border:1px solid #2853a2!important;color:#b8d4ff!important}
+.card,.resultPlane{background:linear-gradient(145deg,#0c1832,#080c1d)!important;border:1px solid #2969d8!important;box-shadow:0 0 17px rgba(0,115,255,.12),inset 0 1px 0 rgba(115,190,255,.08)!important}
+.card:hover,.resultPlane:hover{border-color:#397fff!important;box-shadow:0 0 21px rgba(0,120,255,.19)!important}
+.protocolTitle,.sideTitle{color:#f5f9ff!important}
+.planes{background:#050b1d!important;border:1px solid #324c91!important}
+.plane{color:#b0c3e4!important}
+.plane.active{background:linear-gradient(110deg,#075ef2,#822bfb)!important;color:#fff!important;box-shadow:0 0 13px rgba(125,60,255,.34)!important}
+.plane.done{box-shadow:inset 0 0 0 1px #00e599,0 0 12px rgba(0,229,153,.14)!important;color:#70ffc7!important}
+.camera{background:#02050f!important;border:1px solid #397bff!important;box-shadow:0 0 24px rgba(0,112,255,.25),0 0 12px rgba(164,53,255,.16)!important}
+.camera::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(rgba(0,155,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,155,255,.035) 1px,transparent 1px);background-size:40px 40px}
+.camera video,.camera canvas{z-index:0}
+.camera .placeholder{z-index:2}
+.placeholder{color:#afc8ed!important}
+.placeholderIcon{border-color:#3775f4!important;color:#8dcaff!important;box-shadow:0 0 18px rgba(0,140,255,.2)}
+.cameraStatus,.poseStatus{box-shadow:0 0 9px rgba(0,0,0,.35)}
+.cameraStatus.on,.poseStatus.detected,.positionStatus.valid{background:#07342c!important;color:#63ffc0!important;border-color:#00c994!important;box-shadow:0 0 12px rgba(0,229,153,.2)}
+.primary{background:linear-gradient(110deg,#075ef2,#8d2cff)!important;color:#fff!important;border:1px solid #4b9eff!important;box-shadow:0 0 15px rgba(55,115,255,.31)!important}
+.secondary{background:#111e3b!important;color:#dce9ff!important;border:1px solid #355ba3!important}
+.capture:not(.active){background:linear-gradient(110deg,#087755,#00b979)!important;color:#fff!important;border:1px solid #24e6a0!important;box-shadow:0 0 14px rgba(0,229,153,.19)!important}
+.capture.active{background:linear-gradient(110deg,#8b1536,#e13754)!important;border:1px solid #ff6680!important;box-shadow:0 0 12px rgba(255,65,105,.25)!important}
+button:not(:disabled){transition:box-shadow .2s,filter .2s,transform .2s}
+button:not(:disabled):hover{filter:brightness(1.12);transform:translateY(-1px)}
+button:disabled{opacity:.45!important;cursor:not-allowed!important}
+.progressPlane,.stateBox,.timerBox,.repCounter,.qualityBox,.metric,.sideUsed,.lastRep,.message,.resultMetric{background:#0c1932!important;border:1px solid #2d57a3!important;color:#eff6ff!important}
+.progressPlane.done{background:#092e2b!important;border-color:#00c994!important;color:#66ffc2!important}
+.stateLabel,.timerLabel,.metricLabel,.lastRepTitle,.qualityTop{color:#b5cefa!important}
+.stateValue,.timerValue{color:#7dcaff!important;text-shadow:0 0 12px rgba(0,165,255,.37)}
+.repNumber,.metricValue{color:#f3f9ff!important;text-shadow:0 0 10px rgba(0,155,255,.25)}
+.repDot{background:#142c52!important;border-color:#466ca9!important}
+.repDot.done{background:#00e599!important;border-color:#00e599!important;box-shadow:0 0 12px rgba(0,229,153,.5)!important}
+.qualityBar{background:#182849!important}
+.qualityFill{background:linear-gradient(90deg,#008cff,#00e599)!important;box-shadow:0 0 12px rgba(0,229,153,.35)}
+.lastItem,.sideUsed,.metricSub,.resultPlane>span,.resultMetric span{color:#afbfdf!important}
+.lastItem strong,.resultMetric strong,.sideUsed strong{color:#f2f8ff!important}
+.message{border-left:3px solid #a435ff!important;line-height:1.6!important}
+.results h2,.resultPlane h3{color:#f5f8ff!important}
+.completeBadge{background:#10372f!important;border-color:#00c994!important;color:#66ffc2!important;box-shadow:0 0 12px rgba(0,229,153,.18)}
+.repTable th{color:#82c9ff!important;border-color:#294a83!important}
+.repTable td{color:#e8f2ff!important;border-color:#243b6a!important}
+@media(max-width:850px){main{padding:16px!important}.card{padding:16px!important}.grid{grid-template-columns:1fr!important}.camera{aspect-ratio:16/10}.controls button{flex:1}}
+@media(prefers-reduced-motion:reduce){button:not(:disabled){transition:none!important}button:not(:disabled):hover{transform:none!important}}
+
+
 </style>
 </head>
 <body>
